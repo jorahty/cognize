@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true),
+    return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Row(
-            children: [
-              const CircularProgressIndicator(),
-              FilledButton(
-                onPressed: () {},
-                child: const Text('Hello, World!'),
-              ),
-            ],
-          ),
+          child: Text('Hello, World!'),
         ),
       ),
     );
