@@ -12,7 +12,12 @@
           "package_name": "com.jorahty.cognize"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "566338279940-q0m8mamqhl0rb8asi8alr1g7bjj2896j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDZApvC8ZxKMEAPC2mghWHuyKh0L--HfPg"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566338279940-q0m8mamqhl0rb8asi8alr1g7bjj2896j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "566338279940-eq486r1uj4u0b75h1aipq0q1b1u3ou53.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.jorahty.cognize"
+              }
+            }
+          ]
         }
       }
     }

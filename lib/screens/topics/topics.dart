@@ -1,3 +1,4 @@
+import 'package:cognize/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class TopicsScreen extends StatelessWidget {
@@ -9,8 +10,11 @@ class TopicsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Topics'),
       ),
-      body: const Center(
-        child: Text('Authenticated!'),
+      body: Center(
+        child: FilledButton(
+          onPressed: AuthService().signOut,
+          child: const Text('Sign out'),
+        ),
       ),
     );
   }

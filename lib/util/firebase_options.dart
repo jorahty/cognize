@@ -70,6 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '566338279940',
     projectId: 'cognize-783b6',
     storageBucket: 'cognize-783b6.appspot.com',
+    iosClientId:
+        '566338279940-eq486r1uj4u0b75h1aipq0q1b1u3ou53.apps.googleusercontent.com',
     iosBundleId: 'com.jorahty.cognize',
   );
 }

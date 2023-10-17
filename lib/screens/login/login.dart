@@ -1,3 +1,4 @@
+import 'package:cognize/services/auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -9,8 +10,11 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Login'),
       ),
-      body: const Center(
-        child: Text('You are logged out.'),
+      body: Center(
+        child: FilledButton(
+          onPressed: AuthService().googleSignIn,
+          child: const Text('Sign in with Google'),
+        ),
       ),
     );
   }
