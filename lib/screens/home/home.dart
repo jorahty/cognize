@@ -15,8 +15,12 @@ class HomeScreen extends StatelessWidget {
           return const Text('Loading...');
         } else if (snapshot.hasError) {
           return const Text('Error!');
+
+          // if user is authenticated, show the topics screen
         } else if (snapshot.hasData) {
           return const TopicsScreen();
+
+          // Otherwise, show login screen
         } else {
           return const LoginScreen();
         }
