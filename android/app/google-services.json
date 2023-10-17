@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "566338279940-118d73n0eb9iu82jcb5f4ev9ttqnfe9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jorahty.cognize",
+            "certificate_hash": "c3e1abeb665edd2ea3bc29a1ad93d05bd56fa94a"
+          }
+        },
+        {
           "client_id": "566338279940-q0m8mamqhl0rb8asi8alr1g7bjj2896j.apps.googleusercontent.com",
           "client_type": 3
         }
