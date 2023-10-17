@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
                 height: 18, // Set the height of the SVG image
               ),
               const SizedBox(width: 10),
-              const Text('Sign in with Google'),
+              const Text('Continue with Google'),
             ],
           ),
         ),
