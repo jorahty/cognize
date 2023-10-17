@@ -1,4 +1,4 @@
-package com.example.cognize
+package com.jorahty.cognize
 
 import io.flutter.embedding.android.FlutterActivity
 
