@@ -21,6 +21,23 @@ class TopicsScreen extends StatelessWidget {
           }
         },
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        fixedColor: const Color(0xff00CD77),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Topics',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.info),
+            label: 'About',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 }
