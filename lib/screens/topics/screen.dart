@@ -9,18 +9,6 @@ class TopicsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Cognize')),
-      body: const _Body(),
-    );
-  }
-}
-
-class _Body extends StatelessWidget {
-  const _Body();
-
-  @override
-  Widget build(BuildContext context) {
     final platform = Theme.of(context).platform;
 
     if (platform == TargetPlatform.iOS || platform == TargetPlatform.android) {
@@ -115,10 +103,13 @@ class _Content extends StatelessWidget {
       future: FirestoreService().getTopics(), // Fetch topics
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Column(children: [LinearProgressIndicator()]);
+          return const Center(child: CircularProgressIndicator());
         } else {
           final topics = snapshot.data!;
-          return TopicGrid(topics: topics);
+          return Scaffold(
+            appBar: AppBar(title: const Text('Cognize')),
+            body: TopicGrid(topics: topics),
+          );
         }
       },
     );
