@@ -1,6 +1,7 @@
-import 'package:cognize/services/models.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cognize/services/models.dart';
+import 'package:cognize/screens/topics/details.dart';
 
 class TopicCard extends StatelessWidget {
   final Topic topic;
@@ -16,7 +17,13 @@ class TopicCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => TopicDetails(topic: topic),
+            ),
+          );
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
