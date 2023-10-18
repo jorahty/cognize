@@ -10,6 +10,9 @@ class TopicGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.extent(
       maxCrossAxisExtent: 350,
+      padding: const EdgeInsets.all(10),
+      mainAxisSpacing: 10,
+      crossAxisSpacing: 10,
       children: topics.map((topic) => TopicCard(topic: topic)).toList(),
     );
   }
