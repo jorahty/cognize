@@ -16,8 +16,8 @@ class TopicsScreen extends StatelessWidget {
             return const LinearProgressIndicator();
           } else {
             final topics = snapshot.data!;
-            return GridView.count(
-              crossAxisCount: 2,
+            return GridView.extent(
+              maxCrossAxisExtent: 350,
               children: topics.map((topic) => Text(topic.title)).toList(),
             );
           }
