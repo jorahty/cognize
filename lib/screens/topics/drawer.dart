@@ -7,6 +7,16 @@ class TopicsDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Hello, Drawer');
+    return Drawer(
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: topics.length,
+        itemBuilder: (context, index) {
+          Topic topic = topics[index];
+          return Text(topic.title);
+        },
+        separatorBuilder: (context, index) => const Divider(),
+      ),
+    );
   }
 }
