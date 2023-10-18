@@ -33,6 +33,7 @@ class TopicCard extends StatelessWidget {
             );
           },
           child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
