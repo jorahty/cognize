@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/services/firestore.dart';
 import 'package:cognize/screens/topics/grid.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cognize/screens/topics/drawer.dart';
 
 class TopicsScreen extends StatelessWidget {
   const TopicsScreen({super.key});
@@ -108,6 +109,7 @@ class _Content extends StatelessWidget {
           final topics = snapshot.data!;
           return Scaffold(
             appBar: AppBar(title: const Text('Cognize')),
+            drawer: TopicsDrawer(topics: topics),
             body: TopicGrid(topics: topics),
           );
         }
