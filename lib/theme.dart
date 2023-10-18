@@ -18,4 +18,19 @@ final theme = ThemeData(
       color: Colors.white,
     ),
   ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    selectedItemColor: const Color(0xff00CD77),
+    selectedLabelStyle: GoogleFonts.inter(
+      fontSize: 12,
+      height: 1.7,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+    unselectedLabelStyle: GoogleFonts.inter(
+      fontSize: 12,
+      height: 1.7,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+  ),
 );

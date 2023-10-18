@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/services/firestore.dart';
 import 'package:cognize/screens/topics/grid.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TopicsScreen extends StatelessWidget {
   const TopicsScreen({super.key});
@@ -22,18 +23,17 @@ class TopicsScreen extends StatelessWidget {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        fixedColor: const Color(0xff00CD77),
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(FontAwesomeIcons.house),
             label: 'Topics',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.info),
+            icon: Icon(FontAwesomeIcons.boltLightning),
             label: 'About',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(FontAwesomeIcons.solidCircleUser),
             label: 'Profile',
           ),
         ],

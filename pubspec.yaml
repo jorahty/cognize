@@ -16,6 +16,7 @@ dependencies:
   json_annotation: ^4.8.1
   cloud_firestore: ^4.10.0
   google_fonts: ^6.1.0
+  font_awesome_flutter: ^10.6.0
 
 dev_dependencies:
   flutter_test:
