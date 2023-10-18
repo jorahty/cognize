@@ -17,7 +17,7 @@ A multiple-choice quiz app.
 - **Trunk-Based Development**: Adopt trunk-based development:
   - **No Branching**: Work directly on the main branch to avoid complex merge conflicts.
   - **Pull Before Push**: Always pull the latest changes before pushing your code.
-  - **Atomic Commits**: Make small, focused commits for each task. Every commit should be the smallest incremental change possible. Never do multiple tasks in one commit.
+  - **Atomic Commits**: Make small, focused commits for each task. Every commit should be the smallest incremental change possible. Avoid doing multiple tasks in a single commit.
 
 ## Tech Stack
 
