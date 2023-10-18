@@ -2,6 +2,8 @@
 
 A multiple-choice quiz app.
 
+[**`cognize.it`**](https://cognize.it)
+
 ## Resources
 
 - [Vision](https://www.figma.com/file/o8nVtiRSoGotVulcORqV5a/Cognize)
