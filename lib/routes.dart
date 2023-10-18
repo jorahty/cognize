@@ -1,6 +1,6 @@
-import 'package:cognize/screens/home/home.dart';
-import 'package:cognize/screens/login/login.dart';
-import 'package:cognize/screens/topics/topics.dart';
+import 'package:cognize/screens/home/screen.dart';
+import 'package:cognize/screens/login/screen.dart';
+import 'package:cognize/screens/topics/screen.dart';
 
 final routes = {
   '/': (context) => const HomeScreen(),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cognize/services/auth.dart';
-import 'package:cognize/screens/login/login.dart';
-import 'package:cognize/screens/topics/topics.dart';
+import 'package:cognize/screens/login/screen.dart';
+import 'package:cognize/screens/topics/screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
