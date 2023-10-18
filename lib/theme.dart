@@ -34,18 +34,19 @@ final theme = ThemeData(
     ),
   ),
   navigationRailTheme: NavigationRailThemeData(
-    backgroundColor: const Color(0xff555555),
+    backgroundColor: const Color(0xFF181818),
     selectedIconTheme: const IconThemeData(color: Color(0xff00CD77)),
     selectedLabelTextStyle: GoogleFonts.inter(
       fontSize: 12,
-      height: 1.7,
+      height: 1.8,
       fontWeight: FontWeight.bold,
       color: const Color(0xff00CD77),
     ),
     unselectedLabelTextStyle: GoogleFonts.inter(
-        fontSize: 12,
-        height: 1.7,
-        fontWeight: FontWeight.bold,
-        color: Colors.grey[400]),
+      fontSize: 12,
+      height: 1.8,
+      fontWeight: FontWeight.bold,
+      color: Colors.grey[400],
+    ),
   ),
 );
