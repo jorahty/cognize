@@ -1,3 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-final theme = ThemeData.dark();
+final theme = ThemeData(
+  fontFamily: GoogleFonts.inter().fontFamily,
+  brightness: Brightness.dark,
+);

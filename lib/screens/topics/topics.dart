@@ -35,10 +35,14 @@ class TopicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             topic.title,
-            style: Theme.of(context).textTheme.titleMedium,
+            style: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 16,
+            ),
             // overflow: TextOverflow.fade,
             // softWrap: false,
           ),
