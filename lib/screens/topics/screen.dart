@@ -54,6 +54,13 @@ class _MobileLayout extends StatelessWidget {
               label: 'Profile',
             ),
           ],
+          onTap: (value) {
+            if (value == 1) {
+              Navigator.pushNamed(context, '/about');
+            } else if (value == 2) {
+              Navigator.pushNamed(context, '/profile');
+            }
+          },
         ),
       ],
     );
@@ -85,6 +92,13 @@ class _DesktopLayout extends StatelessWidget {
               label: Text('Profile'),
             ),
           ],
+          onDestinationSelected: (value) {
+            if (value == 1) {
+              Navigator.pushNamed(context, '/about');
+            } else if (value == 2) {
+              Navigator.pushNamed(context, '/profile');
+            }
+          },
         ),
         const Expanded(child: _Content()),
       ],

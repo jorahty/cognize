@@ -6,6 +6,7 @@ final theme = ThemeData(
   textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
   colorScheme: const ColorScheme.dark(
     primary: Color(0xff0D7650),
+    onPrimary: Colors.white,
     shadow: Colors.transparent,
   ),
   appBarTheme: AppBarTheme(
