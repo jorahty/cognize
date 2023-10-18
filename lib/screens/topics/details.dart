@@ -10,9 +10,7 @@ class TopicDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-      ),
+      appBar: AppBar(),
       body: Center(
         child: SizedBox(
           width: 700,
