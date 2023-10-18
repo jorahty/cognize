@@ -14,7 +14,7 @@ class LoginScreen extends StatelessWidget {
       body: Center(
         child: FilledButton(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(const Color(0xff222222)),
+            backgroundColor: MaterialStateProperty.all(const Color(0xff555555)),
           ),
           onPressed: AuthService().googleSignIn,
           child: Row(
@@ -26,7 +26,10 @@ class LoginScreen extends StatelessWidget {
                 height: 18, // Set the height of the SVG image
               ),
               const SizedBox(width: 10),
-              const Text('Continue with Google'),
+              const Text(
+                'Continue with Google',
+                style: TextStyle(color: Colors.white),
+              ),
             ],
           ),
         ),
