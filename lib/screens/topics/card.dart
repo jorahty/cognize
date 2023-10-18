@@ -13,28 +13,31 @@ class TopicCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            child: Image.asset(
-              'assets/placeholder.png',
-              fit: BoxFit.contain,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              topic.title,
-              style: GoogleFonts.inter(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
+      child: InkWell(
+        onTap: () {},
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            SizedBox(
+              child: Image.asset(
+                'assets/placeholder.png',
+                fit: BoxFit.contain,
               ),
-              overflow: TextOverflow.fade,
-              softWrap: false,
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                topic.title,
+                style: GoogleFonts.inter(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+                overflow: TextOverflow.fade,
+                softWrap: false,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

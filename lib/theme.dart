@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final theme = ThemeData(
+  splashFactory: NoSplash.splashFactory,
   textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
   colorScheme: const ColorScheme.dark(
     primary: Color(0xff0D7650),
