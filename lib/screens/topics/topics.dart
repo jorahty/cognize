@@ -18,10 +18,31 @@ class TopicsScreen extends StatelessWidget {
             final topics = snapshot.data!;
             return GridView.extent(
               maxCrossAxisExtent: 350,
-              children: topics.map((topic) => Text(topic.title)).toList(),
+              children: topics.map((topic) => TopicCard(topic: topic)).toList(),
             );
           }
         },
+      ),
+    );
+  }
+}
+
+class TopicCard extends StatelessWidget {
+  final Topic topic;
+  const TopicCard({super.key, required this.topic});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        children: [
+          Text(
+            topic.title,
+            style: Theme.of(context).textTheme.titleMedium,
+            // overflow: TextOverflow.fade,
+            // softWrap: false,
+          ),
+        ],
       ),
     );
   }
