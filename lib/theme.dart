@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final theme = ThemeData(
-  fontFamily: GoogleFonts.inter().fontFamily,
+  textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme),
+  colorScheme: const ColorScheme.dark(
+    primary: Color(0xff0D7650),
+    shadow: Colors.transparent,
+  ),
   appBarTheme: AppBarTheme(
     backgroundColor: const Color(0xff0D7650),
     centerTitle: false,
     elevation: 0,
-    titleTextStyle: TextStyle(
-      color: Colors.white,
-      fontWeight: FontWeight.bold,
-      fontFamily: GoogleFonts.inter().fontFamily,
+    titleTextStyle: GoogleFonts.inter(
       fontSize: 18,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
     ),
-  ),
-  colorScheme: const ColorScheme.dark(
-    primary: Color(0xff0D7650),
-    shadow: Colors.transparent,
   ),
 );
