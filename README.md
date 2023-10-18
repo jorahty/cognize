@@ -31,7 +31,7 @@ A multiple-choice quiz app.
   <tr>
     <td>Frontend</td>
     <td>
-      <img width="200" src="https://storage.googleapis.com/cms-storage-bucket/847ae81f5430402216fd.svg" />
+      <img height="55" src="https://storage.googleapis.com/cms-storage-bucket/847ae81f5430402216fd.svg" />
     </td>
   </tr>
 </table>
