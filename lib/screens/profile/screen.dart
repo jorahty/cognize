@@ -11,17 +11,29 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: FilledButton.icon(
+        child: FilledButton(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(FontAwesomeIcons.rightFromBracket),
+                const SizedBox(width: 15),
+                Text(
+                  'Logout',
+                  style: GoogleFonts.inter(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                )
+              ],
+            ),
+          ),
           onPressed: () {
             AuthService().signOut();
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/', (route) => false);
           },
-          icon: const Icon(FontAwesomeIcons.rightFromBracket),
-          label: Text(
-            'Logout',
-            style: GoogleFonts.inter(fontWeight: FontWeight.w600),
-          ),
         ),
       ),
     );
