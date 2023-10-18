@@ -16,9 +16,12 @@ class TopicDetails extends StatelessWidget {
           width: 700,
           child: ListView(
             children: [
-              Image.asset(
-                'assets/placeholder.png',
-                width: MediaQuery.of(context).size.width,
+              Hero(
+                tag: topic.img,
+                child: Image.asset(
+                  'assets/placeholder.png',
+                  width: MediaQuery.of(context).size.width,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
