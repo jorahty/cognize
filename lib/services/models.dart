@@ -1,6 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'models.g.dart';
 
+// The data classes (aka models) below
+// match the data in the Firestore database
+
 @JsonSerializable()
 class Option {
   String value;
