@@ -19,8 +19,11 @@ class TopicCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) => TopicDetails(topic: topic),
+            PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) =>
+                  TopicDetails(topic: topic),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero,
             ),
           );
         },
