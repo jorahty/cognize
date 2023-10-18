@@ -101,7 +101,7 @@ class _Content extends StatelessWidget {
       future: FirestoreService().getTopics(), // Fetch topics
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LinearProgressIndicator();
+          return const Column(children: [LinearProgressIndicator()]);
         } else {
           final topics = snapshot.data!;
           return TopicGrid(topics: topics);
