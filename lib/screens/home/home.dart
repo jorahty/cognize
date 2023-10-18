@@ -13,16 +13,10 @@ class HomeScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text('Loading...');
-        } else if (snapshot.hasError) {
-          return const Text('Error!');
-
-          // if user is authenticated, show the topics screen
         } else if (snapshot.hasData) {
-          return const TopicsScreen();
-
-          // Otherwise, show login screen
+          return const TopicsScreen(); // When logged in, show topics screen
         } else {
-          return const LoginScreen();
+          return const LoginScreen(); // When logged out, show login screen
         }
       },
     );
