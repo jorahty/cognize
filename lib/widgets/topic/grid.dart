@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cognize/services/models.dart';
-import 'package:cognize/screens/topics/card.dart';
+import 'package:cognize/widgets/topic/card.dart';
 
 class TopicGrid extends StatelessWidget {
   final List<Topic> topics;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cognize/services/models.dart';
-import 'package:cognize/screens/topics/details.dart';
+import 'package:cognize/widgets/topic/details.dart';
 
 class TopicCard extends StatelessWidget {
   final Topic topic;
