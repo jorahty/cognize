@@ -12,8 +12,8 @@ class TopicCard extends StatelessWidget {
     return Hero(
       tag: topic.img,
       child: Card(
+        elevation: 0,
         color: const Color(0xff555555),
-        shadowColor: Colors.transparent,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
