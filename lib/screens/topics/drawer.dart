@@ -9,23 +9,26 @@ class TopicsDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 0,
-      child: ListView.separated(
-        shrinkWrap: true,
-        itemCount: topics.length,
-        itemBuilder: (context, index) {
-          Topic topic = topics[index];
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(topic.title),
-              ),
-              QuizList(topic: topic),
-            ],
-          );
-        },
-        separatorBuilder: (context, index) => const Divider(),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView.separated(
+          shrinkWrap: true,
+          itemCount: topics.length,
+          itemBuilder: (context, index) {
+            Topic topic = topics[index];
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(topic.title),
+                ),
+                QuizList(topic: topic),
+              ],
+            );
+          },
+          separatorBuilder: (context, index) => const Divider(),
+        ),
       ),
     );
   }
@@ -46,10 +49,7 @@ class QuizList extends StatelessWidget {
               onTap: () {},
               child: ListTile(
                 title: Text(quiz.title),
-                subtitle: Text(
-                  quiz.description,
-                  overflow: TextOverflow.fade,
-                ),
+                subtitle: Text(quiz.description),
               ),
             ),
           );
