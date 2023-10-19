@@ -38,7 +38,7 @@ class TopicDetails extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: QuizList(topic: topic),
+                child: QuizList(quizzes: topic.quizzes),
               ),
             ],
           ),
