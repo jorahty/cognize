@@ -17,7 +17,11 @@ class QuizCard extends StatelessWidget {
         onTap: () {},
         child: ListTile(
           title: Text(quiz.title),
-          subtitle: Text(quiz.description),
+          subtitle: Text(
+            quiz.description,
+            overflow: TextOverflow.fade,
+            softWrap: false,
+          ),
         ),
       ),
     );

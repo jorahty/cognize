@@ -25,7 +25,7 @@ class TopicDetails extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(20),
                 child: Text(
                   topic.title,
                   style: GoogleFonts.inter(
@@ -36,7 +36,10 @@ class TopicDetails extends StatelessWidget {
                   softWrap: false,
                 ),
               ),
-              QuizList(topic: topic),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: QuizList(topic: topic),
+              ),
             ],
           ),
         ),

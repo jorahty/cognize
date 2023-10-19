@@ -27,7 +27,7 @@ class TopicList extends StatelessWidget {
             ],
           );
         },
-        separatorBuilder: (context, index) => const Divider(),
+        separatorBuilder: (context, index) => const SizedBox(height: 20),
       ),
     );
   }
