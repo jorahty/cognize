@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cognize/services/models.dart';
+import 'package:cognize/screens/topics/drawer.dart';
 
 class TopicDetails extends StatelessWidget {
   final Topic topic;
@@ -35,6 +36,7 @@ class TopicDetails extends StatelessWidget {
                   softWrap: false,
                 ),
               ),
+              QuizList(topic: topic),
             ],
           ),
         ),
