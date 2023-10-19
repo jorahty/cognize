@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cognize/services/auth.dart';
-import 'package:cognize/screens/login/login.dart';
-import 'package:cognize/screens/topics/topics.dart';
+import 'package:cognize/screens/login/screen.dart';
+import 'package:cognize/screens/topics/screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -13,16 +13,10 @@ class HomeScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text('Loading...');
-        } else if (snapshot.hasError) {
-          return const Text('Error!');
-
-          // if user is authenticated, show the topics screen
         } else if (snapshot.hasData) {
-          return const TopicsScreen();
-
-          // Otherwise, show login screen
+          return const TopicsScreen(); // When logged in, show topics screen
         } else {
-          return const LoginScreen();
+          return const LoginScreen(); // When logged out, show login screen
         }
       },
     );

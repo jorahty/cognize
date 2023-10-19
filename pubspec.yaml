@@ -7,17 +7,28 @@ environment:
   sdk: '>=3.1.3 <4.0.0'
 
 dependencies:
-  firebase_core: ^2.17.0
-  firebase_auth: ^4.10.1
-  google_sign_in: ^6.1.5
   flutter:
     sdk: flutter
+  cloud_firestore: 4.9.2
+  firebase_core: 2.16.0
+  firebase_auth: 4.10.0
+  google_sign_in: ^6.1.5
+  flutter_svg: ^2.0.7
+  json_annotation: ^4.8.1
+  google_fonts: ^6.1.0
+  font_awesome_flutter: ^10.6.0
   sign_in_with_apple: ^3.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/google_logo.svg
+    - assets/placeholder.png

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cognize/util/firebase_options.dart';
 import 'package:cognize/theme.dart';
@@ -19,9 +20,12 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
     return MaterialApp(
       theme: theme,
       routes: routes,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
