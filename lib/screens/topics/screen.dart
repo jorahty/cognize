@@ -10,24 +10,51 @@ class TopicsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<List<Topic>>(
+      future: FirestoreService().getTopics(), // Fetch topics
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          final topics = snapshot.data!;
+          return Scaffold(
+            appBar: AppBar(title: const Text('Cognize')),
+            drawer: TopicsDrawer(topics: topics),
+            body: _Body(topics: topics),
+          );
+        }
+      },
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body({required this.topics});
+
+  final List<Topic> topics;
+
+  @override
+  Widget build(BuildContext context) {
     final platform = Theme.of(context).platform;
 
     if (platform == TargetPlatform.iOS || platform == TargetPlatform.android) {
-      return const _MobileLayout();
+      return _MobileLayout(topics: topics);
     } else {
-      return const _DesktopLayout();
+      return _DesktopLayout(topics: topics);
     }
   }
 }
 
 class _MobileLayout extends StatelessWidget {
-  const _MobileLayout();
+  const _MobileLayout({required this.topics});
+
+  final List<Topic> topics;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Expanded(child: _Content()),
+        Expanded(child: TopicGrid(topics: topics)),
         BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
@@ -57,7 +84,9 @@ class _MobileLayout extends StatelessWidget {
 }
 
 class _DesktopLayout extends StatelessWidget {
-  const _DesktopLayout();
+  const _DesktopLayout({required this.topics});
+
+  final List<Topic> topics;
 
   @override
   Widget build(BuildContext context) {
@@ -89,31 +118,8 @@ class _DesktopLayout extends StatelessWidget {
             }
           },
         ),
-        const Expanded(child: _Content()),
+        Expanded(child: TopicGrid(topics: topics)),
       ],
-    );
-  }
-}
-
-class _Content extends StatelessWidget {
-  const _Content();
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<List<Topic>>(
-      future: FirestoreService().getTopics(), // Fetch topics
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          final topics = snapshot.data!;
-          return Scaffold(
-            appBar: AppBar(title: const Text('Cognize')),
-            drawer: TopicsDrawer(topics: topics),
-            body: TopicGrid(topics: topics),
-          );
-        }
-      },
     );
   }
 }

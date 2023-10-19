@@ -11,7 +11,7 @@ class TopicGrid extends StatelessWidget {
     return GridView.extent(
       maxCrossAxisExtent: 350,
       padding: EdgeInsets.fromLTRB(
-          10, 10, 10, MediaQuery.of(context).size.height * 0.8),
+          10, 10, 10, MediaQuery.of(context).size.height * 0.7),
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       children: topics.map((topic) => TopicCard(topic: topic)).toList(),
