@@ -40,6 +40,7 @@ class TopicDetails extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: QuizList(quizzes: topic.quizzes),
               ),
+              SizedBox(height: MediaQuery.of(context).size.height / 2),
             ],
           ),
         ),
