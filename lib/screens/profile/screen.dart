@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/services/auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -11,7 +12,9 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
-      body: Center(
+      body: Container(
+        padding: const EdgeInsets.all(20),
+        alignment: Alignment.center,
         child: Column(
           children: [
             ClipRRect(
@@ -20,7 +23,13 @@ class ProfileScreen extends StatelessWidget {
             ),
             Text(
               user.displayName!,
+              style: GoogleFonts.inter(
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+                height: 2,
+              ),
             ),
+            const Spacer(),
             FilledButton.icon(
               icon: const Icon(FontAwesomeIcons.arrowRightFromBracket),
               label: const Text('Logout'),
@@ -30,6 +39,7 @@ class ProfileScreen extends StatelessWidget {
                     .pushNamedAndRemoveUntil('/', (route) => false);
               },
             ),
+            const Spacer(),
           ],
         ),
       ),
