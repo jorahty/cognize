@@ -51,4 +51,21 @@ final theme = ThemeData(
       color: Colors.grey[400],
     ),
   ),
+  buttonTheme: ButtonThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(1.0),
+    ),
+  ),
+  filledButtonTheme: FilledButtonThemeData(
+    style: FilledButton.styleFrom(
+      padding: const EdgeInsets.all(20),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      textStyle: GoogleFonts.inter(
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+      ),
+    ),
+  ),
 );

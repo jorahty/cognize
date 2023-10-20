@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/services/firestore.dart';
@@ -93,25 +94,26 @@ class StartPage extends StatelessWidget {
     final state = Provider.of<QuizState>(context);
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                quiz.title,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              const SizedBox(height: 20),
-              Text(quiz.description),
-            ],
-          ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              quiz.title,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const SizedBox(height: 20),
+            Text(quiz.description),
+          ],
         ),
-        FilledButton(
-          style: FilledButton.styleFrom(backgroundColor: Colors.blue),
-          onPressed: state.nextPage,
-          child: const Text('Start Quiz!'),
+        Padding(
+          padding: const EdgeInsets.all(30),
+          child: FilledButton(
+            style: FilledButton.styleFrom(backgroundColor: Colors.blue),
+            onPressed: state.nextPage,
+            child: const Text('Start Quiz!'),
+          ),
         ),
       ],
     );
@@ -121,6 +123,50 @@ class StartPage extends StatelessWidget {
 class QuestionPage extends StatelessWidget {
   final Question question;
   const QuestionPage({super.key, required this.question});
+
+  _showBottomSheet(BuildContext context, Option option, QuizState state) {
+    showBottomSheet(
+      context: context,
+      builder: (context) {
+        return Container(
+          color: Colors.black45,
+          padding: const EdgeInsets.all(20),
+          height: 250,
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                option.correct ? 'Good Job!' : 'Wrong',
+                style: GoogleFonts.inter(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              Text(
+                option.detail,
+                style: GoogleFonts.inter(
+                  color: Colors.white54,
+                ),
+              ),
+              FilledButton(
+                style: !option.correct
+                    ? FilledButton.styleFrom(backgroundColor: Colors.red)
+                    : null,
+                onPressed: () {
+                  if (option.correct) state.nextPage();
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  option.correct ? 'Onward!' : 'Try Again',
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +190,7 @@ class QuestionPage extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     state.selectedOption = option;
-                    // todo: show bottom sheet
+                    _showBottomSheet(context, option, state);
                   },
                   child: ListTile(
                     leading: state.selectedOption == option
@@ -157,10 +203,6 @@ class QuestionPage extends StatelessWidget {
             },
           ).toList(),
         ),
-        FilledButton(
-          onPressed: state.nextPage,
-          child: const Text('Onward!'),
-        ),
       ],
     );
   }
@@ -172,23 +214,19 @@ class CongratsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text('CongratsPage: ${quiz.title}'),
-        FilledButton.icon(
-          icon: const Icon(
-            FontAwesomeIcons.check,
-            color: Colors.green,
-          ),
-          style: FilledButton.styleFrom(backgroundColor: Colors.black45),
-          onPressed: () {
-            // todo: update user report in firestore
-            Navigator.popUntil(context, (route) => route.isFirst);
-          },
-          label: const Text('Mark Complete!'),
+    return Center(
+      child: FilledButton.icon(
+        icon: const Icon(
+          FontAwesomeIcons.check,
+          color: Colors.green,
         ),
-      ],
+        style: FilledButton.styleFrom(backgroundColor: Colors.black45),
+        onPressed: () {
+          // todo: update user report in firestore
+          Navigator.popUntil(context, (route) => route.isFirst);
+        },
+        label: const Text('Mark Complete!'),
+      ),
     );
   }
 }
