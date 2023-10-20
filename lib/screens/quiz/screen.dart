@@ -101,7 +101,10 @@ class StartPage extends StatelessWidget {
           children: [
             Text(
               quiz.title,
-              style: Theme.of(context).textTheme.headlineSmall,
+              style: GoogleFonts.inter(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             const SizedBox(height: 20),
             Text(quiz.description),
