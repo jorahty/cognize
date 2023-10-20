@@ -10,7 +10,7 @@ class QuizState with ChangeNotifier {
   nextPage() async {
     await controller.nextPage(
       duration: const Duration(milliseconds: 500),
-      curve: Curves.easeOutCubic,
+      curve: Curves.easeOutQuart,
     );
   }
 }
