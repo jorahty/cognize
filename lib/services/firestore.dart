@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:cognize/services/auth.dart';
 import 'package:cognize/services/models.dart';
 
@@ -33,5 +34,17 @@ class FirestoreService {
     };
 
     return ref.set(fields, SetOptions(merge: true));
+  }
+
+  userReportStream() {
+    return AuthService().authStream.switchMap((user) {
+      if (user != null) {
+        final ref = _db.collection('reports').doc(user.uid);
+
+        return ref.snapshots().map((doc) => Report.fromJson(doc.data()!));
+      }
+
+      return Stream.fromIterable([Report()]);
+    });
   }
 }
