@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/screens/quiz/screen.dart';
 import 'package:cognize/services/models.dart';
-import 'package:flutter/material.dart';
 
 class QuizCard extends StatelessWidget {
   final Quiz quiz;
@@ -29,6 +30,7 @@ class QuizCard extends StatelessWidget {
           );
         },
         child: ListTile(
+          leading: QuizBadge(quiz: quiz),
           title: Text(quiz.title),
           subtitle: Text(
             quiz.description,
@@ -36,6 +38,23 @@ class QuizCard extends StatelessWidget {
             softWrap: false,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class QuizBadge extends StatelessWidget {
+  final Quiz quiz;
+  const QuizBadge({super.key, required this.quiz});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      width: 40,
+      height: 40,
+      child: Icon(
+        FontAwesomeIcons.solidCircleCheck,
+        color: Colors.green,
       ),
     );
   }
