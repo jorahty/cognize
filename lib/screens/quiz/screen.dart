@@ -21,7 +21,13 @@ class QuizScreen extends StatelessWidget {
             body: PageView.builder(
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                return const StartPage();
+                if (index == 0) {
+                  return StartPage(quiz: quiz);
+                } else if (index == quiz.questions.length + 1) {
+                  return CongratsPage(quiz: quiz);
+                } else {
+                  return const QuestionPage();
+                }
               },
             ),
           );
@@ -32,10 +38,30 @@ class QuizScreen extends StatelessWidget {
 }
 
 class StartPage extends StatelessWidget {
-  const StartPage({super.key});
+  final Quiz quiz;
+  const StartPage({super.key, required this.quiz});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(child: Text('StartPage: ${quiz.title}'));
+  }
+}
+
+class CongratsPage extends StatelessWidget {
+  final Quiz quiz;
+  const CongratsPage({super.key, required this.quiz});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('CongratsPage: ${quiz.title}'));
+  }
+}
+
+class QuestionPage extends StatelessWidget {
+  const QuestionPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(child: Text('QuestionPage'));
   }
 }
