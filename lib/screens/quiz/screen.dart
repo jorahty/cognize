@@ -107,12 +107,13 @@ class StartPage extends StatelessWidget {
             Text(quiz.description),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.all(30),
-          child: FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: Colors.blue),
-            onPressed: state.nextPage,
-            child: const Text('Start Quiz!'),
+        Expanded(
+          child: Center(
+            child: FilledButton(
+              style: FilledButton.styleFrom(backgroundColor: Colors.blue),
+              onPressed: state.nextPage,
+              child: const Text('Start Quiz!'),
+            ),
           ),
         ),
       ],
