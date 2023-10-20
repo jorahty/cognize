@@ -228,7 +228,7 @@ class CongratsPage extends StatelessWidget {
         ),
         style: FilledButton.styleFrom(backgroundColor: Colors.black45),
         onPressed: () {
-          // todo: update user report in firestore
+          FirestoreService().updateUserReport(quiz);
           Navigator.popUntil(context, (route) => route.isFirst);
         },
         label: const Text('Mark Complete!'),

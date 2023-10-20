@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cognize/services/auth.dart';
 import 'package:cognize/services/models.dart';
 
 // This service is responsible for interacting with the Firestore database
@@ -18,5 +19,19 @@ class FirestoreService {
     var ref = _db.collection('quizzes').doc(quizId);
     var snapshot = await ref.get();
     return Quiz.fromJson(snapshot.data()!);
+  }
+
+  updateUserReport(Quiz quiz) {
+    final user = AuthService().user!;
+    final ref = _db.collection('reports').doc(user.uid);
+
+    final fields = {
+      'total': FieldValue.increment(1),
+      'topics': {
+        quiz.topic: FieldValue.arrayUnion([quiz.id]),
+      },
+    };
+
+    return ref.set(fields, SetOptions(merge: true));
   }
 }
