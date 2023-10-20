@@ -18,7 +18,15 @@ class TopicsScreen extends StatelessWidget {
         } else {
           final topics = snapshot.data!;
           return Scaffold(
-            appBar: AppBar(title: const Text('Cognize')),
+            appBar: AppBar(
+              title: const Text('Cognize'),
+              leading: Builder(
+                builder: (BuildContext context) => IconButton(
+                  icon: const Icon(FontAwesomeIcons.bars),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                ),
+              ),
+            ),
             drawer: TopicsDrawer(topics: topics),
             body: _Body(topics: topics),
           );
