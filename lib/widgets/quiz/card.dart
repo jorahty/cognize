@@ -17,8 +17,14 @@ class QuizCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => QuizScreen(quizId: quiz.id),
+            PageRouteBuilder(
+              pageBuilder: (BuildContext context, Animation<double> animation,
+                  Animation<double> secondaryAnimation) {
+                return FadeTransition(
+                  opacity: animation,
+                  child: QuizScreen(quizId: quiz.id),
+                );
+              },
             ),
           );
         },
