@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/services/firestore.dart';
 import 'package:cognize/services/models.dart';
 
@@ -32,7 +33,13 @@ class QuizScreen extends StatelessWidget {
           final state = Provider.of<QuizState>(context);
 
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(FontAwesomeIcons.xmark),
+                onPressed: () => Navigator.pop(context),
+                tooltip: 'Exit quiz',
+              ),
+            ),
             body: PageView.builder(
               scrollDirection: Axis.vertical,
               physics: const NeverScrollableScrollPhysics(),
