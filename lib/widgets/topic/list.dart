@@ -23,7 +23,7 @@ class TopicList extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(topic.title),
               ),
-              QuizList(quizzes: topic.quizzes),
+              QuizList(topic: topic),
             ],
           );
         },

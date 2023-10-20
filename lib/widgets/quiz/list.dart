@@ -3,13 +3,15 @@ import 'package:cognize/widgets/quiz/card.dart';
 import 'package:flutter/material.dart';
 
 class QuizList extends StatelessWidget {
-  final List<Quiz> quizzes;
-  const QuizList({super.key, required this.quizzes});
+  const QuizList({super.key, required this.topic});
+  final Topic topic;
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: quizzes.map((quiz) => QuizCard(quiz: quiz)).toList(),
+      children: topic.quizzes
+          .map((quiz) => QuizCard(topic: topic, quiz: quiz))
+          .toList(),
     );
   }
 }

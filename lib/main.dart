@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cognize/util/firebase_options.dart';
+import 'package:provider/provider.dart';
+
+import 'package:cognize/services/firestore.dart';
+import 'package:cognize/services/models.dart';
 import 'package:cognize/theme.dart';
 import 'package:cognize/routes.dart';
 
@@ -22,10 +26,14 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-    return MaterialApp(
-      theme: theme,
-      routes: routes,
-      debugShowCheckedModeBanner: false,
+    return StreamProvider(
+      create: (_) => FirestoreService().userReportStream(),
+      initialData: Report(),
+      child: MaterialApp(
+        theme: theme,
+        routes: routes,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

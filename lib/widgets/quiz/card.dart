@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/screens/quiz/screen.dart';
 import 'package:cognize/services/models.dart';
 
 class QuizCard extends StatelessWidget {
+  const QuizCard({super.key, required this.topic, required this.quiz});
+  final Topic topic;
   final Quiz quiz;
-  const QuizCard({super.key, required this.quiz});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class QuizCard extends StatelessWidget {
           );
         },
         child: ListTile(
-          leading: QuizBadge(quiz: quiz),
+          leading: QuizBadge(topicId: topic.id, quizId: quiz.id),
           title: Text(quiz.title),
           subtitle: Text(
             quiz.description,
@@ -44,18 +46,20 @@ class QuizCard extends StatelessWidget {
 }
 
 class QuizBadge extends StatelessWidget {
-  final Quiz quiz;
-  const QuizBadge({super.key, required this.quiz});
+  const QuizBadge({super.key, required this.topicId, required this.quizId});
+  final String topicId;
+  final String quizId;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox(
-      width: 40,
-      height: 40,
-      child: Icon(
-        FontAwesomeIcons.solidCircleCheck,
-        color: Colors.green,
-      ),
-    );
+    // Report report = Provider.of<Report>(context);
+    // List completed = report.topics[topicId] ?? [];
+
+    // final icon = completed.contains(quizId)
+    final icon = true
+        ? const Icon(FontAwesomeIcons.solidCircleCheck)
+        : const Icon(FontAwesomeIcons.solidCircleCheck);
+
+    return SizedBox(width: 40, height: 40, child: icon);
   }
 }
