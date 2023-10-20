@@ -18,10 +18,24 @@ class QuizScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(),
-            body: Center(child: Text(quiz.title)),
+            body: PageView.builder(
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return const StartPage();
+              },
+            ),
           );
         }
       },
     );
+  }
+}
+
+class StartPage extends StatelessWidget {
+  const StartPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
