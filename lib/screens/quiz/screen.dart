@@ -179,30 +179,32 @@ class QuestionPage extends StatelessWidget {
         Expanded(
           child: Text(question.text),
         ),
-        Column(
-          children: question.options.map(
-            (option) {
-              return Card(
-                elevation: 0,
-                clipBehavior: Clip.antiAlias,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                child: InkWell(
-                  onTap: () {
-                    state.selectedOption = option;
-                    _showBottomSheet(context, option, state);
-                  },
-                  child: ListTile(
-                    leading: state.selectedOption == option
-                        ? const Icon(FontAwesomeIcons.circleDot)
-                        : const Icon(FontAwesomeIcons.circle),
-                    title: Text(option.value),
+        SafeArea(
+          child: Column(
+            children: question.options.map(
+              (option) {
+                return Card(
+                  elevation: 0,
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
-                ),
-              );
-            },
-          ).toList(),
+                  child: InkWell(
+                    onTap: () {
+                      state.selectedOption = option;
+                      _showBottomSheet(context, option, state);
+                    },
+                    child: ListTile(
+                      leading: state.selectedOption == option
+                          ? const Icon(FontAwesomeIcons.circleDot)
+                          : const Icon(FontAwesomeIcons.circle),
+                      title: Text(option.value),
+                    ),
+                  ),
+                );
+              },
+            ).toList(),
+          ),
         ),
       ],
     );
