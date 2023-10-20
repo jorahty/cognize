@@ -7,17 +7,30 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = AuthService().user!;
+
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(title: const Text('Profile')),
       body: Center(
-        child: FilledButton.icon(
-          icon: const Icon(FontAwesomeIcons.signOut),
-          label: const Text('Logout'),
-          onPressed: () {
-            AuthService().signOut();
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil('/', (route) => false);
-          },
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(user.photoURL!),
+            ),
+            Text(
+              user.displayName!,
+            ),
+            FilledButton.icon(
+              icon: const Icon(FontAwesomeIcons.arrowRightFromBracket),
+              label: const Text('Logout'),
+              onPressed: () {
+                AuthService().signOut();
+                Navigator.of(context)
+                    .pushNamedAndRemoveUntil('/', (route) => false);
+              },
+            ),
+          ],
         ),
       ),
     );
