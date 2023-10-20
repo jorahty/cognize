@@ -14,7 +14,7 @@ class QuizScreen extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else {
-          final quiz = snapshot.data ?? Quiz();
+          final quiz = snapshot.data!;
 
           return Scaffold(
             appBar: AppBar(),
