@@ -17,6 +17,7 @@ dependencies:
   json_annotation: ^4.8.1
   google_fonts: ^6.1.0
   font_awesome_flutter: ^10.6.0
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

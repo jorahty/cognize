@@ -1,6 +1,18 @@
-import 'package:cognize/services/firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:cognize/services/firestore.dart';
 import 'package:cognize/services/models.dart';
+
+class QuizState with ChangeNotifier {
+  final PageController controller = PageController();
+
+  nextPage() async {
+    await controller.nextPage(
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeOutCubic,
+    );
+  }
+}
 
 class QuizScreen extends StatelessWidget {
   final String quizId;
@@ -8,18 +20,23 @@ class QuizScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Quiz>(
-      future: FirestoreService().getQuiz(quizId),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
+    return ChangeNotifierProvider(
+      create: (_) => QuizState(),
+      child: FutureBuilder<Quiz>(
+        future: FirestoreService().getQuiz(quizId),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
           final quiz = snapshot.data!;
+          final state = Provider.of<QuizState>(context);
 
           return Scaffold(
             appBar: AppBar(),
             body: PageView.builder(
               scrollDirection: Axis.vertical,
+              physics: const NeverScrollableScrollPhysics(),
+              controller: state.controller,
               itemCount: quiz.questions.length + 2,
               itemBuilder: (context, index) {
                 if (index == 0) {
@@ -32,8 +49,8 @@ class QuizScreen extends StatelessWidget {
               },
             ),
           );
-        }
-      },
+        },
+      ),
     );
   }
 }
@@ -44,7 +61,39 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('StartPage: ${quiz.title}'));
+    final state = Provider.of<QuizState>(context);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('StartPage: ${quiz.title}'),
+        FilledButton(
+          onPressed: state.nextPage,
+          child: const Text('Start Quiz!'),
+        ),
+      ],
+    );
+  }
+}
+
+class QuestionPage extends StatelessWidget {
+  final Question question;
+  const QuestionPage({super.key, required this.question});
+
+  @override
+  Widget build(BuildContext context) {
+    final state = Provider.of<QuizState>(context);
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('QuestionPage: ${question.text}'),
+        FilledButton(
+          onPressed: state.nextPage,
+          child: const Text('Onward!'),
+        ),
+      ],
+    );
   }
 }
 
@@ -55,15 +104,5 @@ class CongratsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('CongratsPage: ${quiz.title}'));
-  }
-}
-
-class QuestionPage extends StatelessWidget {
-  final Question question;
-  const QuestionPage({super.key, required this.question});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('QuestionPage: ${question.text}'));
   }
 }
