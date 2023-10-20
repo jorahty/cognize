@@ -18,7 +18,7 @@ class QuizCard extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const QuizScreen(),
+              builder: (context) => QuizScreen(quizId: quiz.id),
             ),
           );
         },

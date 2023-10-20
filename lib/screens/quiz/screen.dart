@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class QuizScreen extends StatelessWidget {
-  const QuizScreen({super.key});
+  final String quizId;
+  const QuizScreen({super.key, required this.quizId});
 
   @override
   Widget build(BuildContext context) {
