@@ -24,7 +24,7 @@ class QuizScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 if (index == 0) {
                   return StartPage(quiz: quiz);
-                } else if (index < quiz.questions.length + 1) {
+                } else if (index <= quiz.questions.length) {
                   return QuestionPage(question: quiz.questions[index - 1]);
                 } else {
                   return CongratsPage(quiz: quiz);
