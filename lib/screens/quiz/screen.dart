@@ -110,6 +110,18 @@ class CongratsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('CongratsPage: ${quiz.title}'));
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('CongratsPage: ${quiz.title}'),
+        FilledButton(
+          onPressed: () {
+            // todo: update user report in firestore
+            Navigator.popUntil(context, (route) => route.isFirst);
+          },
+          child: const Text('Mark Complete!'),
+        ),
+      ],
+    );
   }
 }
