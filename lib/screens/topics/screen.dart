@@ -66,15 +66,15 @@ class _MobileLayout extends StatelessWidget {
         BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.house),
+              icon: Icon(FontAwesomeIcons.house, size: 18),
               label: 'Topics',
             ),
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.boltLightning),
+              icon: Icon(FontAwesomeIcons.boltLightning, size: 18),
               label: 'About',
             ),
             BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.solidCircleUser),
+              icon: Icon(FontAwesomeIcons.solidCircleUser, size: 18),
               label: 'Profile',
             ),
           ],
