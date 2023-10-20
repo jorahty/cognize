@@ -30,9 +30,9 @@ class App extends StatelessWidget {
       create: (_) => FirestoreService().userReportStream(),
       initialData: Report(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: theme,
         routes: routes,
-        debugShowCheckedModeBanner: false,
       ),
     );
   }

@@ -52,13 +52,12 @@ class QuizBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Report report = Provider.of<Report>(context);
-    // List completed = report.topics[topicId] ?? [];
+    Report report = Provider.of<Report>(context);
+    List completed = report.topics[topicId] ?? [];
 
-    // final icon = completed.contains(quizId)
-    final icon = true
-        ? const Icon(FontAwesomeIcons.solidCircleCheck)
-        : const Icon(FontAwesomeIcons.solidCircleCheck);
+    final icon = completed.contains(quizId)
+        ? const Icon(FontAwesomeIcons.solidCircleCheck, color: Colors.green)
+        : const Icon(FontAwesomeIcons.solidCircle, color: Colors.grey);
 
     return SizedBox(width: 40, height: 40, child: icon);
   }

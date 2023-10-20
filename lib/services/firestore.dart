@@ -36,7 +36,7 @@ class FirestoreService {
     return ref.set(fields, SetOptions(merge: true));
   }
 
-  userReportStream() {
+  Stream<Report> userReportStream() {
     return AuthService().authStream.switchMap((user) {
       if (user != null) {
         final ref = _db.collection('reports').doc(user.uid);
