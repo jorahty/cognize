@@ -20,6 +20,7 @@ final theme = ThemeData(
     ),
   ),
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: Colors.black45,
     selectedItemColor: const Color(0xff00CD77),
     selectedLabelStyle: GoogleFonts.inter(
       fontSize: 12,
@@ -35,7 +36,7 @@ final theme = ThemeData(
     ),
   ),
   navigationRailTheme: NavigationRailThemeData(
-    backgroundColor: const Color(0xFF181818),
+    backgroundColor: Colors.black45,
     selectedIconTheme: const IconThemeData(color: Color(0xff00CD77)),
     selectedLabelTextStyle: GoogleFonts.inter(
       fontSize: 12,

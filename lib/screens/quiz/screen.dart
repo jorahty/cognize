@@ -34,6 +34,7 @@ class QuizScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.black45,
               leading: IconButton(
                 icon: const Icon(FontAwesomeIcons.xmark),
                 onPressed: () => Navigator.pop(context),
@@ -75,6 +76,7 @@ class StartPage extends StatelessWidget {
       children: [
         Text('StartPage: ${quiz.title}'),
         FilledButton(
+          style: FilledButton.styleFrom(backgroundColor: Colors.blue),
           onPressed: state.nextPage,
           child: const Text('Start Quiz!'),
         ),
@@ -95,6 +97,26 @@ class QuestionPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text('QuestionPage: ${question.text}'),
+        Column(
+          children: question.options.map(
+            (opt) {
+              return Card(
+                elevation: 0,
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: InkWell(
+                  onTap: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(opt.value),
+                  ),
+                ),
+              );
+            },
+          ).toList(),
+        ),
         FilledButton(
           onPressed: state.nextPage,
           child: const Text('Onward!'),
@@ -114,12 +136,17 @@ class CongratsPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text('CongratsPage: ${quiz.title}'),
-        FilledButton(
+        FilledButton.icon(
+          icon: const Icon(
+            FontAwesomeIcons.check,
+            color: Colors.green,
+          ),
+          style: FilledButton.styleFrom(backgroundColor: Colors.black45),
           onPressed: () {
             // todo: update user report in firestore
             Navigator.popUntil(context, (route) => route.isFirst);
           },
-          child: const Text('Mark Complete!'),
+          label: const Text('Mark Complete!'),
         ),
       ],
     );
