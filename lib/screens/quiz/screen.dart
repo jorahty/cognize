@@ -41,20 +41,32 @@ class QuizScreen extends StatelessWidget {
                 tooltip: 'Exit quiz',
               ),
             ),
-            body: PageView.builder(
-              scrollDirection: Axis.vertical,
-              physics: const NeverScrollableScrollPhysics(),
-              controller: state.controller,
-              itemCount: quiz.questions.length + 2,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return StartPage(quiz: quiz);
-                } else if (index <= quiz.questions.length) {
-                  return QuestionPage(question: quiz.questions[index - 1]);
-                } else {
-                  return CongratsPage(quiz: quiz);
-                }
-              },
+            body: Center(
+              child: SizedBox(
+                width: 700,
+                child: PageView.builder(
+                  scrollDirection: Axis.vertical,
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: state.controller,
+                  itemCount: quiz.questions.length + 2,
+                  itemBuilder: (context, index) {
+                    late final Widget page;
+
+                    if (index == 0) {
+                      page = StartPage(quiz: quiz);
+                    } else if (index <= quiz.questions.length) {
+                      page = QuestionPage(question: quiz.questions[index - 1]);
+                    } else {
+                      page = CongratsPage(quiz: quiz);
+                    }
+
+                    return Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: page,
+                    );
+                  },
+                ),
+              ),
             ),
           );
         },
@@ -74,7 +86,19 @@ class StartPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('StartPage: ${quiz.title}'),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                quiz.title,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 20),
+              Text(quiz.description),
+            ],
+          ),
+        ),
         FilledButton(
           style: FilledButton.styleFrom(backgroundColor: Colors.blue),
           onPressed: state.nextPage,
@@ -96,10 +120,12 @@ class QuestionPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('QuestionPage: ${question.text}'),
+        Expanded(
+          child: Text(question.text),
+        ),
         Column(
           children: question.options.map(
-            (opt) {
+            (option) {
               return Card(
                 elevation: 0,
                 clipBehavior: Clip.antiAlias,
@@ -108,9 +134,9 @@ class QuestionPage extends StatelessWidget {
                 ),
                 child: InkWell(
                   onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(opt.value),
+                  child: ListTile(
+                    leading: const Icon(FontAwesomeIcons.circle),
+                    title: Text(option.value),
                   ),
                 ),
               );
