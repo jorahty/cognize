@@ -13,6 +13,15 @@ class QuizState with ChangeNotifier {
       curve: Curves.easeOutQuart,
     );
   }
+
+  Option? _selectedOption;
+
+  Option? get selectedOption => _selectedOption;
+
+  set selectedOption(Option? option) {
+    _selectedOption = option;
+    notifyListeners();
+  }
 }
 
 class QuizScreen extends StatelessWidget {
@@ -133,9 +142,14 @@ class QuestionPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    state.selectedOption = option;
+                    // todo: show bottom sheet
+                  },
                   child: ListTile(
-                    leading: const Icon(FontAwesomeIcons.circle),
+                    leading: state.selectedOption == option
+                        ? const Icon(FontAwesomeIcons.circleDot)
+                        : const Icon(FontAwesomeIcons.circle),
                     title: Text(option.value),
                   ),
                 ),
