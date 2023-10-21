@@ -1,5 +1,6 @@
 import 'package:cognize/widgets/quiz/list.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cognize/services/models.dart';
 
@@ -11,7 +12,13 @@ class TopicDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(FontAwesomeIcons.chevronLeft),
+          onPressed: () => Navigator.of(context).pop(),
+          tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+        ),
+      ),
       body: Center(
         child: SizedBox(
           width: 700,

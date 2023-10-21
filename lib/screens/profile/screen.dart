@@ -14,7 +14,14 @@ class ProfileScreen extends StatelessWidget {
     final report = Provider.of<Report>(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Profile')),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(FontAwesomeIcons.chevronLeft),
+          onPressed: () => Navigator.of(context).pop(),
+          tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+        ),
+        title: const Text('Profile'),
+      ),
       body: Container(
         padding: const EdgeInsets.all(30),
         alignment: Alignment.center,
