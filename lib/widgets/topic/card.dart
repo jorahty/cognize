@@ -42,7 +42,7 @@ class TopicCard extends StatelessWidget {
                 children: [
                   SizedBox(
                     child: Image.asset(
-                      'assets/placeholder.png',
+                      'assets/topics/${topic.img}',
                       fit: BoxFit.contain,
                     ),
                   ),
