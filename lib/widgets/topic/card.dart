@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/widgets/topic/details.dart';
+import 'package:cognize/widgets/common/progress_bar.dart';
 
 class TopicCard extends StatelessWidget {
   final Topic topic;
@@ -45,7 +47,7 @@ class TopicCard extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(10),
                     child: Text(
                       topic.title,
                       style: GoogleFonts.inter(
@@ -56,6 +58,10 @@ class TopicCard extends StatelessWidget {
                       softWrap: false,
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: TopicProgress(topic: topic),
+                  ),
                 ],
               ),
             ],
@@ -63,5 +69,51 @@ class TopicCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class TopicProgress extends StatelessWidget {
+  const TopicProgress({super.key, required this.topic});
+
+  final Topic topic;
+
+  @override
+  Widget build(BuildContext context) {
+    Report report = Provider.of<Report>(context);
+    return Row(
+      children: [
+        _progressCount(report, topic),
+        Expanded(
+          child: AnimatedProgressBar(
+            value: _calculateProgress(topic, report),
+            height: 8,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _progressCount(Report report, Topic topic) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8),
+      child: Text(
+        '${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
+        style: GoogleFonts.inter(
+          fontSize: 12,
+          color: Colors.white54,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+
+  double _calculateProgress(Topic topic, Report report) {
+    try {
+      int totalQuizzes = topic.quizzes.length;
+      int completedQuizzes = report.topics[topic.id].length;
+      return completedQuizzes / totalQuizzes;
+    } catch (err) {
+      return 0.0;
+    }
   }
 }

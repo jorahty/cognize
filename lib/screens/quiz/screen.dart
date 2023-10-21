@@ -112,9 +112,10 @@ class StartPage extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: FilledButton(
+            child: FilledButton.icon(
               onPressed: state.nextPage,
-              child: const Text('Start Quiz!'),
+              icon: const Icon(Icons.rocket_launch_rounded),
+              label: const Text('Start Quiz!'),
             ),
           ),
         ),
