@@ -2,7 +2,7 @@
 
 A multiple-choice quiz app.
 
-<code>https://[**cognize.it**](https://cognize.it)</code>
+<code>https://[**cognize.dev**](https://cognize.dev)</code>
 
 ## Resources
 
