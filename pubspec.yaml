@@ -32,4 +32,4 @@ flutter:
 
   assets:
     - assets/google_logo.svg
-    - assets/placeholder.png
+    - assets/topics/

@@ -27,7 +27,7 @@ class TopicDetails extends StatelessWidget {
               Hero(
                 tag: topic.img,
                 child: Image.asset(
-                  'assets/placeholder.png',
+                  'assets/topics/${topic.img}',
                   width: MediaQuery.of(context).size.width,
                 ),
               ),
