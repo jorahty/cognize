@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cognize/services/models.dart';
-import 'package:cognize/services/auth.dart';
+
+import '../../services/auth.dart';
+import '../../services/models.dart';
+import '../../widgets/common/button.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -57,14 +59,14 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            FilledButton.icon(
-              icon: const Icon(FontAwesomeIcons.arrowRightFromBracket),
-              label: const Text('Logout'),
+            Button(
               onPressed: () {
                 AuthService().signOut();
                 Navigator.of(context)
                     .pushNamedAndRemoveUntil('/', (route) => false);
               },
+              leading: const Icon(FontAwesomeIcons.arrowRightFromBracket),
+              label: const Text('Logout'),
             ),
             const Spacer(),
           ],
