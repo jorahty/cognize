@@ -1,3 +1,4 @@
+import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,26 +12,26 @@ class QuizCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: InkWell(
-        onTap: () {
-          Navigator.of(context).push(
-            PageRouteBuilder(
-              pageBuilder: (BuildContext context, Animation<double> animation,
-                  Animation<double> secondaryAnimation) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: QuizScreen(quizId: quiz.id),
-                );
-              },
-            ),
-          );
-        },
+    return Pressable(
+      onPressed: () {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            pageBuilder: (BuildContext context, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return FadeTransition(
+                opacity: animation,
+                child: QuizScreen(quizId: quiz.id),
+              );
+            },
+          ),
+        );
+      },
+      child: Card(
+        elevation: 0,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
         child: ListTile(
           leading: QuizBadge(topicId: topic.id, quizId: quiz.id),
           title: Text(quiz.title),
