@@ -26,12 +26,11 @@ class TopicsScreen extends StatelessWidget {
               title: const Text('Cognize'),
               leading: Row(
                 children: [
-                  Builder (
-                    builder: (BuildContext context) => IconButton(
-                      icon: const Icon(FontAwesomeIcons.bars),
-                      onPressed: () => Scaffold.of(context).openDrawer(),
-                    )
-                  ),
+                  Builder(
+                      builder: (BuildContext context) => IconButton(
+                            icon: const Icon(FontAwesomeIcons.bars),
+                            onPressed: () => Scaffold.of(context).openDrawer(),
+                          )),
                 ],
               ),
               actions: [
@@ -40,8 +39,8 @@ class TopicsScreen extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.all(8.0),
                       child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.network(user.photoURL!),
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.network(user.photoURL!),
                       ),
                     ),
                     SizedBox(width: 10),
@@ -112,6 +111,10 @@ class _MobileLayout extends StatelessWidget {
               icon: Icon(FontAwesomeIcons.solidCircleUser, size: 18),
               label: 'Profile',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.solidCircleUser, size: 18),
+              label: 'Create',
+            )
           ],
           onTap: (value) {
             if (value == 1) {
