@@ -1,3 +1,4 @@
+import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,29 +12,29 @@ class TopicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: topic.img,
-      child: Card(
-        elevation: 0,
-        color: const Color(0xff555555),
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: InkWell(
-          onTap: () {
-            Navigator.of(context).push(
-              PageRouteBuilder(
-                pageBuilder: (BuildContext context, Animation<double> animation,
-                    Animation<double> secondaryAnimation) {
-                  return FadeTransition(
-                    opacity: animation,
-                    child: TopicDetails(topic: topic),
-                  );
-                },
-              ),
-            );
-          },
+    return Pressable(
+      onPressed: () {
+        Navigator.of(context).push(
+          PageRouteBuilder(
+            pageBuilder: (BuildContext context, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return FadeTransition(
+                opacity: animation,
+                child: TopicDetails(topic: topic),
+              );
+            },
+          ),
+        );
+      },
+      child: Hero(
+        tag: topic.img,
+        child: Card(
+          elevation: 0,
+          color: const Color(0xff555555),
+          clipBehavior: Clip.antiAlias,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           child: ListView(
             physics: const NeverScrollableScrollPhysics(),
             children: [
