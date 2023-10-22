@@ -28,11 +28,11 @@ class QuizCard extends StatelessWidget {
       },
       child: Card(
         elevation: 0,
-        clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15),
         ),
         child: ListTile(
+          mouseCursor: SystemMouseCursors.click,
           leading: QuizBadge(topicId: topic.id, quizId: quiz.id),
           title: Text(quiz.title),
           subtitle: Text(
