@@ -44,11 +44,17 @@ class TopicsScreen extends StatelessWidget {
                       child: Image.network(user.photoURL!),
                       ),
                     ),
-                    Text(
-                      user.displayName!,
-                      style: GoogleFonts.inter(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
+                    SizedBox(width: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/profile');
+                      },
+                      child: Text(
+                        user.displayName!,
+                        style: GoogleFonts.inter(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                     SizedBox(width: 10),
