@@ -5,6 +5,7 @@ import 'package:cognize/services/firestore.dart';
 import 'package:cognize/widgets/topic/grid.dart';
 import 'package:cognize/screens/topics/drawer.dart';
 import 'package:cognize/services/auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TopicsScreen extends StatelessWidget {
   const TopicsScreen({super.key});
@@ -42,10 +43,18 @@ class TopicsScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15),
                       child: Image.network(user.photoURL!),
                       ),
-                    )
+                    ),
+                    Text(
+                      user.displayName!,
+                      style: GoogleFonts.inter(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(width: 10),
                   ],
-                )
-              ]
+                ),
+              ],
             ),
             drawer: TopicsDrawer(topics: topics),
             body: _Body(topics: topics),
