@@ -1,7 +1,6 @@
 import 'package:cognize/widgets/quiz/list.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:cognize/services/models.dart';
 
 class TopicDetails extends StatelessWidget {

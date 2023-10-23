@@ -1,7 +1,6 @@
 import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/widgets/topic/details.dart';
 import 'package:cognize/widgets/common/progress_bar.dart';

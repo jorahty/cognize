@@ -5,7 +5,6 @@ import 'package:cognize/services/firestore.dart';
 import 'package:cognize/widgets/topic/grid.dart';
 import 'package:cognize/screens/topics/drawer.dart';
 import 'package:cognize/services/auth.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TopicsScreen extends StatelessWidget {
   const TopicsScreen({super.key});
