@@ -29,7 +29,7 @@ class AnimatedProgressBar extends StatelessWidget {
                 height: height,
                 width: box.maxWidth * _floor(value),
                 decoration: BoxDecoration(
-                  color: _colorGen(value),
+                  color: Colors.green,
                   borderRadius: BorderRadius.all(
                     Radius.circular(height),
                   ),
@@ -45,9 +45,5 @@ class AnimatedProgressBar extends StatelessWidget {
   // Always round negative or NaNs to min value
   _floor(double value, [min = 0.0]) {
     return value.sign <= min ? min : value;
-  }
-
-  Color _colorGen(double value) {
-    return Colors.green;
   }
 }

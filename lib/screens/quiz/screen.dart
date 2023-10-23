@@ -54,7 +54,6 @@ class QuizScreen extends StatelessWidget {
 
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.black45,
               leading: IconButton(
                 icon: const Icon(FontAwesomeIcons.xmark),
                 onPressed: () => Navigator.pop(context),
@@ -140,7 +139,6 @@ class QuestionPage extends StatelessWidget {
       context: context,
       builder: (context) {
         return Container(
-          color: Colors.black45,
           padding: const EdgeInsets.all(20),
           height: 250,
           width: MediaQuery.of(context).size.width,

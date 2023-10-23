@@ -13,7 +13,6 @@ class LoginScreen extends StatelessWidget {
       body: Center(
         child: Button(
           onPressed: AuthService().googleSignIn,
-          color: const Color(0xFF444444),
           leading: SvgPicture.asset(
             'assets/google_logo.svg',
             width: 18,

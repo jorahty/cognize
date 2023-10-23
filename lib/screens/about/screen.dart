@@ -29,31 +29,16 @@ class AboutScreen extends StatelessWidget {
                   Text(
                     "Cognize is a free quiz app that allows self learning through quizzes on multiple subjects on this platform.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
                   ),
                   SizedBox(height: 16.0),
                   Text(
                     "It allows for users to learn from predefined quizzes or collaborate and learn from other peoples quizzes or self-created quizzes.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
                   ),
                   SizedBox(height: 16.0),
                   Text(
                     "It allows for the ability to learn from any device with integrated support for Windows, IOS and Android devices.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
                   ),
                 ],
               ),
