@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cognize/services/firestore.dart';
-import 'package:cognize/services/models.dart';
-import 'package:cognize/widgets/common/progress_bar.dart';
+
+import '../../services/models.dart';
+import '../../services/firestore.dart';
+import '../../widgets/common/progress_bar.dart';
+import '../../widgets/common/button.dart';
 
 class QuizState with ChangeNotifier {
   final PageController controller = PageController();
@@ -123,9 +125,9 @@ class StartPage extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: FilledButton.icon(
+            child: Button(
               onPressed: state.nextPage,
-              icon: const Icon(Icons.rocket_launch_rounded),
+              leading: const Icon(Icons.rocket_launch_rounded),
               label: const Text('Start Quiz!'),
             ),
           ),
