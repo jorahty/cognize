@@ -50,10 +50,6 @@ class TopicCard extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Text(
                       topic.title,
-                      style: GoogleFonts.inter(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
                       overflow: TextOverflow.fade,
                       softWrap: false,
                     ),
@@ -98,10 +94,6 @@ class TopicProgress extends StatelessWidget {
       padding: const EdgeInsets.only(left: 8),
       child: Text(
         '${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
-        style: GoogleFonts.inter(
-          fontSize: 12,
-          fontWeight: FontWeight.w700,
-        ),
       ),
     );
   }

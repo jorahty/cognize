@@ -37,26 +37,20 @@ class TopicsScreen extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child: Image.network(user.photoURL!),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushNamed(context, '/profile');
                       },
-                      child: Text(
-                        user.displayName!,
-                        style: GoogleFonts.inter(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      child: Text(user.displayName!),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                   ],
                 ),
               ],

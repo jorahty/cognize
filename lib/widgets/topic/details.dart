@@ -35,10 +35,6 @@ class TopicDetails extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 child: Text(
                   topic.title,
-                  style: GoogleFonts.inter(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
                   overflow: TextOverflow.fade,
                   softWrap: false,
                 ),

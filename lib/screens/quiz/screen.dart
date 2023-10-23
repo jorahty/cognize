@@ -113,13 +113,7 @@ class StartPage extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              quiz.title,
-              style: GoogleFonts.inter(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text(quiz.title),
             const SizedBox(height: 20),
             Text(quiz.description),
           ],
@@ -154,19 +148,8 @@ class QuestionPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                option.correct ? 'Good Job!' : 'Wrong',
-                style: GoogleFonts.inter(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-              Text(
-                option.detail,
-                style: GoogleFonts.inter(
-                  color: Colors.white54,
-                ),
-              ),
+              Text(option.correct ? 'Good Job!' : 'Wrong'),
+              Text(option.detail),
               Button(
                 onPressed: () {
                   if (option.correct) state.nextPage();
