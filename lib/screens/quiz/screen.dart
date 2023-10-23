@@ -168,16 +168,14 @@ class QuestionPage extends StatelessWidget {
                 ),
               ),
               Button(
-                color: option.correct
-                    ? const Color(0xff0D7650)
-                    : const Color(0xFFF44336),
                 onPressed: () {
                   if (option.correct) state.nextPage();
                   Navigator.pop(context);
                 },
-                label: Text(
-                  option.correct ? 'Onward!' : 'Try Again',
-                ),
+                color: option.correct
+                    ? const Color(0xff0D7650)
+                    : const Color(0xFFF44336),
+                label: Text(option.correct ? 'Onward!' : 'Try Again'),
               ),
             ],
           ),
