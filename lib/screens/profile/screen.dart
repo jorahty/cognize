@@ -33,31 +33,10 @@ class ProfileScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               child: Image.network(user.photoURL!),
             ),
-            Text(
-              user.displayName!,
-              style: GoogleFonts.inter(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
-                height: 2,
-              ),
-            ),
+            Text(user.displayName!),
             const Spacer(),
-            Text(
-              '${report.total}',
-              style: GoogleFonts.inter(
-                fontSize: 56,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            Text(
-              'Quizzes Completed',
-              style: GoogleFonts.inter(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                height: 1.5,
-                color: Colors.white60,
-              ),
-            ),
+            Text('${report.total}'),
+            const Text('Quizzes Completed'),
             const Spacer(),
             Button(
               onPressed: () {
