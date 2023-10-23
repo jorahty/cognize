@@ -7,6 +7,7 @@ import '../../services/models.dart';
 import '../../services/firestore.dart';
 import '../../widgets/common/progress_bar.dart';
 import '../../widgets/common/button.dart';
+import '../../widgets/common/pressable.dart';
 
 class QuizState with ChangeNotifier {
   final PageController controller = PageController();
@@ -199,18 +200,19 @@ class QuestionPage extends StatelessWidget {
           child: Column(
             children: question.options.map(
               (option) {
-                return Card(
-                  elevation: 0,
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      state.selectedOption = option;
-                      _showBottomSheet(context, option, state);
-                    },
+                return Pressable(
+                  onPressed: () {
+                    state.selectedOption = option;
+                    _showBottomSheet(context, option, state);
+                  },
+                  child: Card(
+                    elevation: 0,
+                    clipBehavior: Clip.antiAlias,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                     child: ListTile(
+                      mouseCursor: SystemMouseCursors.click,
                       leading: state.selectedOption == option
                           ? const Icon(FontAwesomeIcons.circleDot)
                           : const Icon(FontAwesomeIcons.circle),
