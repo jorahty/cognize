@@ -167,15 +167,15 @@ class QuestionPage extends StatelessWidget {
                   color: Colors.white54,
                 ),
               ),
-              FilledButton(
-                style: !option.correct
-                    ? FilledButton.styleFrom(backgroundColor: Colors.red)
-                    : null,
+              Button(
+                color: option.correct
+                    ? const Color(0xff0D7650)
+                    : const Color(0xFFF44336),
                 onPressed: () {
                   if (option.correct) state.nextPage();
                   Navigator.pop(context);
                 },
-                child: Text(
+                label: Text(
                   option.correct ? 'Onward!' : 'Try Again',
                 ),
               ),
