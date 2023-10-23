@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final theme = ThemeData();
+final theme = ThemeData.dark();
 
 // final theme = ThemeData(
 //   splashFactory: NoSplash.splashFactory,
