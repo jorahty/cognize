@@ -30,7 +30,6 @@ class TopicCard extends StatelessWidget {
         tag: topic.img,
         child: Card(
           elevation: 0,
-          color: const Color(0xff555555),
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -101,7 +100,6 @@ class TopicProgress extends StatelessWidget {
         '${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
         style: GoogleFonts.inter(
           fontSize: 12,
-          color: Colors.white54,
           fontWeight: FontWeight.w700,
         ),
       ),
