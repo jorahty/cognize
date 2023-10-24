@@ -53,8 +53,14 @@ class QuizBadge extends StatelessWidget {
     List completed = report.topics[topicId] ?? [];
 
     final icon = completed.contains(quizId)
-        ? const Icon(FontAwesomeIcons.solidCircleCheck, color: Colors.green)
-        : const Icon(FontAwesomeIcons.solidCircle, color: Colors.grey);
+        ? Icon(
+            FontAwesomeIcons.solidCircleCheck,
+            color: Theme.of(context).colorScheme.secondary,
+          )
+        : const Icon(
+            FontAwesomeIcons.solidCircle,
+            color: Colors.grey,
+          );
 
     return SizedBox(width: 40, height: 40, child: icon);
   }
