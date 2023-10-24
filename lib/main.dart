@@ -1,3 +1,4 @@
+import 'package:cognize/widgets/auth_gate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -7,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:cognize/services/firestore.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/theme.dart';
-import 'package:cognize/routes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ class App extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme,
-        routes: routes,
+        home: const AuthGate(),
       ),
     );
   }

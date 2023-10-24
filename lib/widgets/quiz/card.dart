@@ -2,7 +2,7 @@ import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:cognize/screens/quiz/screen.dart';
+import 'package:cognize/pages/quiz/page.dart';
 import 'package:cognize/services/models.dart';
 
 class QuizCard extends StatelessWidget {
@@ -20,7 +20,7 @@ class QuizCard extends StatelessWidget {
                 Animation<double> secondaryAnimation) {
               return FadeTransition(
                 opacity: animation,
-                child: QuizScreen(quizId: quiz.id),
+                child: QuizPage(quizId: quiz.id),
               );
             },
           ),

@@ -6,8 +6,8 @@ import '../../services/auth.dart';
 import '../../services/models.dart';
 import '../../widgets/common/button.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {

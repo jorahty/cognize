@@ -4,8 +4,8 @@ import 'package:cognize/services/auth.dart';
 
 import '../../widgets/common/button.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class AuthPage extends StatelessWidget {
+  const AuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {

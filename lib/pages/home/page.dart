@@ -1,16 +1,16 @@
-import 'package:cognize/screens/about/screen.dart';
-import 'package:cognize/screens/profile/screen.dart';
+import 'package:cognize/pages/about/page.dart';
+import 'package:cognize/pages/create/page.dart';
+import 'package:cognize/pages/topics/page.dart';
 import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/services/firestore.dart';
-import 'package:cognize/widgets/topic/grid.dart';
-import 'package:cognize/screens/topics/drawer.dart';
+import 'package:cognize/pages/home/drawer.dart';
 import 'package:cognize/services/auth.dart';
 
-class TopicsScreen extends StatelessWidget {
-  const TopicsScreen({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class TopicsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            drawer: TopicsDrawer(topics: topics),
+            drawer: HomeDrawer(topics: topics),
             body: _Body(topics: topics),
           );
         }
@@ -67,7 +67,7 @@ class TopicsScreen extends StatelessWidget {
 }
 
 class _Body extends StatefulWidget {
-  const _Body({super.key, required this.topics});
+  const _Body({required this.topics});
 
   final List<Topic> topics;
 
@@ -85,17 +85,17 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      TopicGrid(topics: widget.topics),
-      const AboutScreen(),
-      const ProfileScreen(),
+      TopicsPage(topics: widget.topics),
+      const AboutPage(),
+      const CreatePage(),
     ];
 
     final navBarItems = [
       NavBarItem(
         isSelected: _selectedIndex == 0,
         onPressed: () => _selectIndex(0),
-        icon: const Icon(FontAwesomeIcons.house),
-        label: 'Home',
+        icon: const Icon(FontAwesomeIcons.graduationCap),
+        label: 'Topics',
       ),
       NavBarItem(
         isSelected: _selectedIndex == 1,
