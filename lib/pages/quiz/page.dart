@@ -99,19 +99,21 @@ class StartPage extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: Button(
-              onPressed: state.nextPage,
-              leading: const Icon(Icons.rocket_launch_rounded),
-              label: const Text('Start Quiz!'),
-            )
-                .animate(
-                    onPlay: (controller) => controller.repeat(reverse: true))
-                .slideY(
-                  end: 0.15,
-                  duration: 1.seconds,
-                  curve: const Cubic(1, 0, 0.7, 1),
-                )
-                .tint(color: const Color(0x3462DAFF)),
+            child: RepaintBoundary(
+              child: Button(
+                onPressed: state.nextPage,
+                leading: const Icon(Icons.rocket_launch_rounded),
+                label: const Text('Start Quiz!'),
+              )
+                  .animate(
+                      onPlay: (controller) => controller.repeat(reverse: true))
+                  .slideY(
+                    end: 0.15,
+                    duration: 1.seconds,
+                    curve: const Cubic(1, 0, 0.7, 1),
+                  )
+                  .tint(color: const Color(0x3462DAFF)),
+            ),
           ),
         ),
       ],
@@ -226,22 +228,25 @@ class CongratsPage extends StatelessWidget {
             child: Image.asset('assets/wolf.gif'),
           ),
           const SizedBox(height: 20),
-          Button(
-            onPressed: () {
-              FirestoreService().updateUserReport(quiz);
-              Navigator.popUntil(context, (route) => route.isFirst);
-            },
-            leading: const Icon(FontAwesomeIcons.circleCheck),
-            label: const Text('Mark Complete'),
-            color: Theme.of(context).colorScheme.secondary,
-          )
-              .animate(onPlay: (controller) => controller.repeat())
-              .shimmer(delay: 400.ms, duration: 1800.ms, color: Colors.white30)
-              .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
-              .scaleXY(end: 1.1, duration: 600.ms)
-              .then(delay: 600.ms)
-              .scaleXY(end: 1 / 1.1, curve: Curves.easeOut)
-              .then(delay: 0.1.seconds),
+          RepaintBoundary(
+            child: Button(
+              onPressed: () {
+                FirestoreService().updateUserReport(quiz);
+                Navigator.popUntil(context, (route) => route.isFirst);
+              },
+              leading: const Icon(FontAwesomeIcons.circleCheck),
+              label: const Text('Mark Complete'),
+              color: Theme.of(context).colorScheme.secondary,
+            )
+                .animate(onPlay: (controller) => controller.repeat())
+                .shimmer(
+                    delay: 400.ms, duration: 1800.ms, color: Colors.white30)
+                .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
+                .scaleXY(end: 1.1, duration: 600.ms)
+                .then(delay: 600.ms)
+                .scaleXY(end: 1 / 1.1, curve: Curves.easeOut)
+                .then(delay: 0.1.seconds),
+          ),
         ],
       ),
     );
