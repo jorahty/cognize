@@ -213,22 +213,37 @@ class CongratsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Button(
-        onPressed: () {
-          FirestoreService().updateUserReport(quiz);
-          Navigator.popUntil(context, (route) => route.isFirst);
-        },
-        leading: const Icon(FontAwesomeIcons.circleCheck),
-        label: const Text('Mark Complete'),
-        color: Theme.of(context).colorScheme.secondary,
-      )
-          .animate(onPlay: (controller) => controller.repeat())
-          .shimmer(delay: 400.ms, duration: 1800.ms, color: Colors.white30)
-          .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
-          .scaleXY(end: 1.1, duration: 600.ms)
-          .then(delay: 600.ms)
-          .scaleXY(end: 1 / 1.1, curve: Curves.easeOut)
-          .then(delay: 0.1.seconds),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Congrats! You completed the ${quiz.title} quiz',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 20),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.asset('assets/wolf.gif'),
+          ),
+          const SizedBox(height: 20),
+          Button(
+            onPressed: () {
+              FirestoreService().updateUserReport(quiz);
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
+            leading: const Icon(FontAwesomeIcons.circleCheck),
+            label: const Text('Mark Complete'),
+            color: Theme.of(context).colorScheme.secondary,
+          )
+              .animate(onPlay: (controller) => controller.repeat())
+              .shimmer(delay: 400.ms, duration: 1800.ms, color: Colors.white30)
+              .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
+              .scaleXY(end: 1.1, duration: 600.ms)
+              .then(delay: 600.ms)
+              .scaleXY(end: 1 / 1.1, curve: Curves.easeOut)
+              .then(delay: 0.1.seconds),
+        ],
+      ),
     );
   }
 }
