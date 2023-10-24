@@ -1,3 +1,4 @@
+import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/services/models.dart';
@@ -63,102 +64,182 @@ class TopicsScreen extends StatelessWidget {
   }
 }
 
-class _Body extends StatelessWidget {
-  const _Body({required this.topics});
+class _Body extends StatefulWidget {
+  const _Body({super.key, required this.topics});
 
   final List<Topic> topics;
 
   @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
+  var _selectedIndex = 0;
+
+  _selectIndex(int index) {
+    setState(() => _selectedIndex = index);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final pages = [
+      TopicGrid(topics: widget.topics),
+      TopicGrid(topics: widget.topics),
+      TopicGrid(topics: widget.topics),
+    ];
+
+    final navBarItems = [
+      NavBarItem(isSelected: _selectedIndex == 0, onTap: () => _selectIndex(0)),
+      NavBarItem(isSelected: _selectedIndex == 1, onTap: () => _selectIndex(1)),
+      NavBarItem(isSelected: _selectedIndex == 2, onTap: () => _selectIndex(2)),
+    ];
+
     final platform = Theme.of(context).platform;
 
-    if (platform == TargetPlatform.iOS || platform == TargetPlatform.android) {
-      return _MobileLayout(topics: topics);
+    final onMobile =
+        platform == TargetPlatform.iOS || platform == TargetPlatform.android;
+
+    if (onMobile) {
+      return Column(
+        children: [
+          Expanded(child: pages[_selectedIndex]),
+          Row(
+            children: navBarItems.map((item) => Expanded(child: item)).toList(),
+          ),
+        ],
+      );
     } else {
-      return _DesktopLayout(topics: topics);
+      return Row(
+        children: [
+          Column(children: navBarItems),
+          Expanded(child: pages[_selectedIndex]),
+        ],
+      );
     }
   }
 }
 
-class _MobileLayout extends StatelessWidget {
-  const _MobileLayout({required this.topics});
+class NavBarItem extends StatelessWidget {
+  const NavBarItem({
+    super.key,
+    required this.isSelected,
+    required this.onTap,
+  });
 
-  final List<Topic> topics;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(child: TopicGrid(topics: topics)),
-        BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.house, size: 18),
-              label: 'Topics',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.boltLightning, size: 18),
-              label: 'About',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.solidCircleUser, size: 18),
-              label: 'Profile',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.solidCircleUser, size: 18),
-              label: 'Create',
-            )
-          ],
-          onTap: (value) {
-            if (value == 1) {
-              Navigator.pushNamed(context, '/about');
-            } else if (value == 2) {
-              Navigator.pushNamed(context, '/profile');
-            }
-          },
-        ),
-      ],
+    return Pressable(
+      onPressed: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(15),
+        color: isSelected
+            ? Theme.of(context).colorScheme.primary
+            : Colors.transparent,
+        child: const SafeArea(child: Icon(FontAwesomeIcons.house)),
+      ),
     );
   }
 }
 
-class _DesktopLayout extends StatelessWidget {
-  const _DesktopLayout({required this.topics});
+// class _Body extends StatelessWidget {
+//   const _Body({required this.topics});
 
-  final List<Topic> topics;
+//   final List<Topic> topics;
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        NavigationRail(
-          labelType: NavigationRailLabelType.all,
-          selectedIndex: 0,
-          destinations: const [
-            NavigationRailDestination(
-              icon: Icon(FontAwesomeIcons.house),
-              label: Text('Topics'),
-            ),
-            NavigationRailDestination(
-              icon: Icon(FontAwesomeIcons.boltLightning),
-              label: Text('About'),
-            ),
-            NavigationRailDestination(
-              icon: Icon(FontAwesomeIcons.solidCircleUser),
-              label: Text('Profile'),
-            ),
-          ],
-          onDestinationSelected: (value) {
-            if (value == 1) {
-              Navigator.pushNamed(context, '/about');
-            } else if (value == 2) {
-              Navigator.pushNamed(context, '/profile');
-            }
-          },
-        ),
-        Expanded(child: TopicGrid(topics: topics)),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     final platform = Theme.of(context).platform;
+
+//     if (platform == TargetPlatform.iOS || platform == TargetPlatform.android) {
+//       return _MobileLayout(topics: topics);
+//     } else {
+//       return _DesktopLayout(topics: topics);
+//     }
+//   }
+// }
+
+// class _MobileLayout extends StatelessWidget {
+//   const _MobileLayout({required this.topics});
+
+//   final List<Topic> topics;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Expanded(child: TopicGrid(topics: topics)),
+//         BottomNavigationBar(
+//           items: const [
+//             BottomNavigationBarItem(
+//               icon: Icon(FontAwesomeIcons.house, size: 18),
+//               label: 'Topics',
+//             ),
+//             BottomNavigationBarItem(
+//               icon: Icon(FontAwesomeIcons.boltLightning, size: 18),
+//               label: 'About',
+//             ),
+//             BottomNavigationBarItem(
+//               icon: Icon(FontAwesomeIcons.solidCircleUser, size: 18),
+//               label: 'Profile',
+//             ),
+//             BottomNavigationBarItem(
+//               icon: Icon(FontAwesomeIcons.solidCircleUser, size: 18),
+//               label: 'Create',
+//             )
+//           ],
+//           onTap: (value) {
+//             if (value == 1) {
+//               Navigator.pushNamed(context, '/about');
+//             } else if (value == 2) {
+//               Navigator.pushNamed(context, '/profile');
+//             }
+//           },
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+// class _DesktopLayout extends StatelessWidget {
+//   const _DesktopLayout({required this.topics});
+
+//   final List<Topic> topics;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Row(
+//       crossAxisAlignment: CrossAxisAlignment.start,
+//       children: [
+//         NavigationRail(
+//           labelType: NavigationRailLabelType.all,
+//           selectedIndex: 0,
+//           destinations: const [
+//             NavigationRailDestination(
+//               icon: Icon(FontAwesomeIcons.house),
+//               label: Text('Topics'),
+//             ),
+//             NavigationRailDestination(
+//               icon: Icon(FontAwesomeIcons.boltLightning),
+//               label: Text('About'),
+//             ),
+//             NavigationRailDestination(
+//               icon: Icon(FontAwesomeIcons.solidCircleUser),
+//               label: Text('Profile'),
+//             ),
+//           ],
+//           onDestinationSelected: (value) {
+//             if (value == 1) {
+//               Navigator.pushNamed(context, '/about');
+//             } else if (value == 2) {
+//               Navigator.pushNamed(context, '/profile');
+//             }
+//           },
+//         ),
+//         Expanded(child: TopicGrid(topics: topics)),
+//       ],
+//     );
+//   }
+// }
