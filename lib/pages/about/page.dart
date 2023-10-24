@@ -17,11 +17,12 @@ class AboutPage extends StatelessWidget {
               width: 280,
             ),
             const SizedBox(height: 50),
-            const SizedBox(
+            SizedBox(
               width: 250,
               child: Text(
                 "A platform where users can evaluate their knowledge and skills",
                 textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
           ],

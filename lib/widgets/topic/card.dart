@@ -44,8 +44,7 @@ class TopicCard extends StatelessWidget {
                     padding: const EdgeInsets.all(10),
                     child: Text(
                       topic.title,
-                      overflow: TextOverflow.fade,
-                      softWrap: false,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                   Padding(

@@ -26,10 +26,21 @@ class UserDetails extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               child: Image.network(user.photoURL!),
             ),
-            Text(user.displayName!),
+            const SizedBox(height: 20),
+            Text(
+              user.displayName!,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
             const Spacer(),
-            Text('${report.total}'),
-            const Text('Quizzes Completed'),
+            Text(
+              '${report.total}',
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Quizzes Completed',
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
             const Spacer(),
             Button(
               onPressed: () async {

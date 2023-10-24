@@ -21,7 +21,10 @@ class TopicList extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(topic.title),
+                child: Text(
+                  topic.title,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
               ),
               QuizList(topic: topic),
             ],

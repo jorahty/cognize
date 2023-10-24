@@ -85,7 +85,10 @@ class StartPage extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(quiz.title),
+            Text(
+              quiz.title,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
             const SizedBox(height: 20),
             Text(quiz.description),
           ],
