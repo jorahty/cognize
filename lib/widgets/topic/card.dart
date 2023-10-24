@@ -32,7 +32,6 @@ class TopicCard extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(
                     child: Image.asset(
@@ -42,14 +41,17 @@ class TopicCard extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10),
-                    child: Text(
-                      topic.title,
-                      style: Theme.of(context).textTheme.titleMedium,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          topic.title,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        const SizedBox(height: 10),
+                        TopicProgress(topic: topic),
+                      ],
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: TopicProgress(topic: topic),
                   ),
                 ],
               ),
