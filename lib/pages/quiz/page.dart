@@ -1,5 +1,6 @@
 import 'package:cognize/pages/quiz/state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -102,7 +103,15 @@ class StartPage extends StatelessWidget {
               onPressed: state.nextPage,
               leading: const Icon(Icons.rocket_launch_rounded),
               label: const Text('Start Quiz!'),
-            ),
+            )
+                .animate(
+                    onPlay: (controller) => controller.repeat(reverse: true))
+                .slideY(
+                  end: 0.15,
+                  duration: 1.seconds,
+                  curve: const Cubic(1, 0, 0.7, 1),
+                )
+                .tint(color: const Color(0x3462DAFF)),
           ),
         ),
       ],
@@ -204,18 +213,22 @@ class CongratsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FilledButton.icon(
-        icon: const Icon(
-          FontAwesomeIcons.check,
-          color: Colors.green,
-        ),
-        style: FilledButton.styleFrom(backgroundColor: Colors.black45),
+      child: Button(
         onPressed: () {
           FirestoreService().updateUserReport(quiz);
           Navigator.popUntil(context, (route) => route.isFirst);
         },
-        label: const Text('Mark Complete!'),
-      ),
+        leading: const Icon(FontAwesomeIcons.circleCheck),
+        label: const Text('Mark Complete'),
+        color: Theme.of(context).colorScheme.secondary,
+      )
+          .animate(onPlay: (controller) => controller.repeat())
+          .shimmer(delay: 400.ms, duration: 1800.ms, color: Colors.white30)
+          .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
+          .scaleXY(end: 1.1, duration: 600.ms)
+          .then(delay: 600.ms)
+          .scaleXY(end: 1 / 1.1, curve: Curves.easeOut)
+          .then(delay: 0.1.seconds),
     );
   }
 }
