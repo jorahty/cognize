@@ -46,7 +46,7 @@ class TopicCard extends StatelessWidget {
                       children: [
                         Text(
                           topic.title,
-                          style: Theme.of(context).textTheme.titleMedium,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                         const SizedBox(height: 10),
                         TopicProgress(topic: topic),
@@ -75,7 +75,7 @@ class TopicProgress extends StatelessWidget {
       children: [
         Text(
           ' ${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
-          style: Theme.of(context).textTheme.labelMedium,
+          style: Theme.of(context).textTheme.labelLarge,
         ),
         Expanded(
           child: AnimatedProgressBar(

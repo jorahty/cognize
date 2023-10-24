@@ -34,7 +34,7 @@ class TopicDetails extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 child: Text(
                   topic.title,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
               Padding(

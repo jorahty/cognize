@@ -18,7 +18,7 @@ class AboutPage extends StatelessWidget {
             ),
             const SizedBox(height: 50),
             SizedBox(
-              width: 250,
+              width: 300,
               child: Text(
                 "A platform where users can evaluate their knowledge and skills",
                 textAlign: TextAlign.center,

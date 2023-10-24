@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final theme = ThemeData(
   brightness: Brightness.dark,
@@ -10,6 +11,48 @@ final theme = ThemeData(
     clipBehavior: Clip.antiAlias,
   ),
   appBarTheme: const AppBarTheme(elevation: 0),
+  textTheme: TextTheme(
+    bodyMedium: GoogleFonts.inter(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+    ),
+    bodyLarge: GoogleFonts.inter(
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+    ),
+    titleMedium: GoogleFonts.inter(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+    ),
+    titleLarge: GoogleFonts.inter(
+      fontSize: 18,
+      fontWeight: FontWeight.w700,
+    ),
+    headlineSmall: GoogleFonts.inter(
+      fontSize: 24,
+      fontWeight: FontWeight.w700,
+    ),
+    labelLarge: GoogleFonts.inter(
+      fontSize: 14,
+      fontWeight: FontWeight.w700,
+      color: Colors.white60,
+    ),
+    labelMedium: GoogleFonts.inter(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      color: Colors.white60,
+    ),
+    headlineMedium: GoogleFonts.inter(
+      fontSize: 36,
+      fontWeight: FontWeight.w700,
+      color: Colors.white,
+    ),
+    displayMedium: GoogleFonts.inter(
+      fontSize: 48,
+      fontWeight: FontWeight.w700,
+      color: Colors.white,
+    ),
+  ),
 );
 
 // final theme = ThemeData(
