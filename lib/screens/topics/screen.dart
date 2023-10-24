@@ -1,3 +1,5 @@
+import 'package:cognize/screens/about/screen.dart';
+import 'package:cognize/screens/profile/screen.dart';
 import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -84,14 +86,29 @@ class _BodyState extends State<_Body> {
   Widget build(BuildContext context) {
     final pages = [
       TopicGrid(topics: widget.topics),
-      TopicGrid(topics: widget.topics),
-      TopicGrid(topics: widget.topics),
+      const AboutScreen(),
+      const ProfileScreen(),
     ];
 
     final navBarItems = [
-      NavBarItem(isSelected: _selectedIndex == 0, onTap: () => _selectIndex(0)),
-      NavBarItem(isSelected: _selectedIndex == 1, onTap: () => _selectIndex(1)),
-      NavBarItem(isSelected: _selectedIndex == 2, onTap: () => _selectIndex(2)),
+      NavBarItem(
+        isSelected: _selectedIndex == 0,
+        onPressed: () => _selectIndex(0),
+        icon: const Icon(FontAwesomeIcons.house),
+        label: 'Home',
+      ),
+      NavBarItem(
+        isSelected: _selectedIndex == 1,
+        onPressed: () => _selectIndex(1),
+        icon: const Icon(FontAwesomeIcons.bolt),
+        label: 'About',
+      ),
+      NavBarItem(
+        isSelected: _selectedIndex == 2,
+        onPressed: () => _selectIndex(2),
+        icon: const Icon(FontAwesomeIcons.circlePlus),
+        label: 'Create',
+      ),
     ];
 
     final platform = Theme.of(context).platform;
@@ -123,22 +140,33 @@ class NavBarItem extends StatelessWidget {
   const NavBarItem({
     super.key,
     required this.isSelected,
-    required this.onTap,
+    required this.onPressed,
+    required this.icon,
+    required this.label,
   });
 
   final bool isSelected;
-  final VoidCallback onTap;
+  final VoidCallback onPressed;
+  final Icon icon;
+  final String label;
 
   @override
   Widget build(BuildContext context) {
     return Pressable(
-      onPressed: onTap,
+      onPressed: onPressed,
       child: Container(
         padding: const EdgeInsets.all(15),
         color: isSelected
             ? Theme.of(context).colorScheme.primary
             : Colors.transparent,
-        child: const SafeArea(child: Icon(FontAwesomeIcons.house)),
+        child: SafeArea(
+            child: Column(
+          children: [
+            icon,
+            const SizedBox(height: 7),
+            Text(label),
+          ],
+        )),
       ),
     );
   }
