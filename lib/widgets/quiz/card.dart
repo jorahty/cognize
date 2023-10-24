@@ -59,7 +59,7 @@ class QuizBadge extends StatelessWidget {
           )
         : const Icon(
             FontAwesomeIcons.solidCircle,
-            color: Colors.grey,
+            color: Colors.white60,
           );
 
     return SizedBox(width: 40, height: 40, child: icon);

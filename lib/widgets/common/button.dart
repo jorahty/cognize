@@ -5,7 +5,7 @@ import 'pressable.dart';
 class Button extends StatefulWidget {
   Button({
     Key? key,
-    this.color = Colors.blue,
+    this.color = const Color(0xff2A66FF),
     required this.onPressed,
     this.leading,
     required this.label,

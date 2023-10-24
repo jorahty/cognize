@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final theme = ThemeData(
-  brightness: Brightness.dark,
   cardTheme: CardTheme(
     elevation: 0,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(15.0),
     ),
     clipBehavior: Clip.antiAlias,
+    color: const Color(0xff415575),
   ),
   appBarTheme: const AppBarTheme(elevation: 0),
+  scaffoldBackgroundColor: const Color(0xff192E50),
   textTheme: TextTheme(
     bodyMedium: GoogleFonts.inter(
       fontSize: 14,
@@ -52,6 +53,20 @@ final theme = ThemeData(
       fontWeight: FontWeight.w700,
       color: Colors.white,
     ),
+  ),
+  colorScheme: const ColorScheme(
+    brightness: Brightness.dark,
+    primary: Color(0xff2A66FF),
+    onPrimary: Colors.white,
+    secondary: Color(0xff17B24C),
+    onSecondary: Colors.white,
+    error: Colors.red,
+    onError: Colors.white,
+    background: Color(0xff192E50),
+    onBackground: Colors.white,
+    surface: Color(0xff415575),
+    onSurface: Colors.white,
+    surfaceVariant: Color(0xff0D1B3E),
   ),
 );
 

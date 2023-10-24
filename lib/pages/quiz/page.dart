@@ -140,8 +140,8 @@ class QuestionPage extends StatelessWidget {
                   Navigator.pop(context);
                 },
                 color: option.correct
-                    ? const Color(0xff0D7650)
-                    : const Color(0xFFF44336),
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.error,
                 label: Text(option.correct ? 'Onward!' : 'Try Again'),
               ),
             ],
