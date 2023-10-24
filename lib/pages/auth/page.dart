@@ -20,10 +20,20 @@ class AuthPage extends StatelessWidget {
             ),
             Button(
               onPressed: AuthService().googleSignIn,
-              leading: SvgPicture.asset(
-                'assets/google_logo.svg',
-                width: 18,
-                height: 18,
+              leading: Container(
+                width: 22,
+                height: 22,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    'assets/google_logo.svg',
+                    width: 18,
+                    height: 18,
+                  ),
+                ),
               ),
               label: const Text('Continue with Google'),
             ),
