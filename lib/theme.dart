@@ -12,6 +12,7 @@ final theme = ThemeData(
   ),
   appBarTheme: const AppBarTheme(elevation: 0),
   scaffoldBackgroundColor: const Color(0xff192E50),
+  drawerTheme: const DrawerThemeData(backgroundColor: Color(0xff192E50)),
   textTheme: TextTheme(
     bodyMedium: GoogleFonts.inter(
       fontSize: 14,

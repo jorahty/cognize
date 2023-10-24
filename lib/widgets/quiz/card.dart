@@ -31,11 +31,7 @@ class QuizCard extends StatelessWidget {
           mouseCursor: SystemMouseCursors.click,
           leading: QuizBadge(topicId: topic.id, quizId: quiz.id),
           title: Text(quiz.title),
-          subtitle: Text(
-            quiz.description,
-            overflow: TextOverflow.fade,
-            softWrap: false,
-          ),
+          subtitle: Text(quiz.description),
         ),
       ),
     );
