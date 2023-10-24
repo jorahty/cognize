@@ -42,7 +42,10 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Image.network(user.photoURL!),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: ClipOval(child: Image.network(user.photoURL!)),
+                  ),
                 ),
               ],
             ),
