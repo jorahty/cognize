@@ -73,12 +73,9 @@ class TopicProgress extends StatelessWidget {
     Report report = Provider.of<Report>(context);
     return Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: Text(
-            '${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
+        Text(
+          ' ${report.topics[topic.id]?.length ?? 0} / ${topic.quizzes.length}',
+          style: Theme.of(context).textTheme.labelMedium,
         ),
         Expanded(
           child: AnimatedProgressBar(
