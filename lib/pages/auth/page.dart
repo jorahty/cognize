@@ -24,7 +24,7 @@ class AuthPage extends StatelessWidget {
                 width: 22,
                 height: 22,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   borderRadius: BorderRadius.circular(100),
                 ),
                 child: Center(
