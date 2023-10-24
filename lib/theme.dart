@@ -9,6 +9,7 @@ final theme = ThemeData(
     ),
     clipBehavior: Clip.antiAlias,
   ),
+  appBarTheme: const AppBarTheme(elevation: 0),
 );
 
 // final theme = ThemeData(
