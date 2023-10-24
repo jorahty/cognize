@@ -6,28 +6,19 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Card(
-        child: Padding(
-          padding: EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Cognize is a free quiz app that allows self learning through quizzes on multiple subjects on this platform.",
+      child: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            SizedBox(
+              width: 250,
+              child: Text(
+                "A platform where users can evaluate their knowledge and skills",
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 16.0),
-              Text(
-                "It allows for users to learn from predefined quizzes or collaborate and learn from other peoples quizzes or self-created quizzes.",
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                "It allows for the ability to learn from any device with integrated support for Windows, IOS and Android devices.",
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
