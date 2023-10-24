@@ -14,9 +14,9 @@ class AuthGate extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text('Loading...');
         } else if (snapshot.hasData) {
-          return const HomePage(); // When logged in, show topics screen
+          return const HomePage(); // show home page when authenticated
         } else {
-          return const AuthPage(); // When logged out, show login screen
+          return const AuthPage(); // show auth page when unauthenticated
         }
       },
     );
