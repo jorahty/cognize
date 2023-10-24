@@ -21,7 +21,8 @@ class HomePage extends StatelessWidget {
       future: FirestoreService().getTopics(), // Fetch topics
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Scaffold(
+              body: Center(child: CircularProgressIndicator()));
         } else {
           final topics = snapshot.data!;
           return Scaffold(
