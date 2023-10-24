@@ -114,15 +114,22 @@ class _BodyState extends State<_Body> {
       return Column(
         children: [
           Expanded(child: pages[_selectedIndex]),
-          Row(
-            children: navBarItems.map((item) => Expanded(child: item)).toList(),
+          Container(
+            color: Theme.of(context).colorScheme.surfaceVariant,
+            child: Row(
+              children:
+                  navBarItems.map((item) => Expanded(child: item)).toList(),
+            ),
           ),
         ],
       );
     } else {
       return Row(
         children: [
-          Column(children: navBarItems),
+          Container(
+            color: Theme.of(context).colorScheme.surfaceVariant,
+            child: Column(children: navBarItems),
+          ),
           Expanded(child: pages[_selectedIndex]),
         ],
       );
@@ -149,6 +156,7 @@ class NavBarItem extends StatelessWidget {
     return Pressable(
       onPressed: onPressed,
       child: Container(
+        width: 80,
         padding: const EdgeInsets.all(15),
         color: isSelected
             ? Theme.of(context).colorScheme.primary
