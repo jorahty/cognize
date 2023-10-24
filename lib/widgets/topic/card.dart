@@ -48,7 +48,7 @@ class TopicCard extends StatelessWidget {
                           topic.title,
                           style: Theme.of(context).textTheme.titleLarge,
                           softWrap: false,
-                          overflow: TextOverflow.fade,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 10),
                         TopicProgress(topic: topic),
