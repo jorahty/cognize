@@ -40,8 +40,6 @@ class ProfilePage extends StatelessWidget {
             Button(
               onPressed: () {
                 AuthService().signOut();
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/', (route) => false);
               },
               leading: const Icon(FontAwesomeIcons.arrowRightFromBracket),
               label: const Text('Logout'),
