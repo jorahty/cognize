@@ -90,7 +90,10 @@ class StartPage extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineMedium,
             ),
             const SizedBox(height: 20),
-            Text(quiz.description),
+            Text(
+              quiz.description,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ],
         ),
         Expanded(
@@ -116,14 +119,21 @@ class QuestionPage extends StatelessWidget {
       context: context,
       builder: (context) {
         return Container(
+          color: Theme.of(context).colorScheme.surfaceVariant,
           padding: const EdgeInsets.all(20),
           height: 250,
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(option.correct ? 'Good Job!' : 'Wrong'),
-              Text(option.detail),
+              Text(
+                option.correct ? 'Good Job!' : 'Wrong',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Text(
+                option.detail,
+                style: Theme.of(context).textTheme.labelMedium,
+              ),
               Button(
                 onPressed: () {
                   if (option.correct) state.nextPage();
@@ -149,7 +159,10 @@ class QuestionPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
-          child: Text(question.text),
+          child: Text(
+            question.text,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
         ),
         SafeArea(
           child: Column(
