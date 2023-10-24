@@ -4,6 +4,7 @@ import 'package:cognize/pages/profile/page.dart';
 import 'package:cognize/pages/topics/page.dart';
 import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/services/firestore.dart';
@@ -27,7 +28,7 @@ class HomePage extends StatelessWidget {
           final topics = snapshot.data!;
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Cognize'),
+              title: SvgPicture.asset('assets/logo.svg', height: 30),
               leading: Builder(
                 builder: (BuildContext context) => IconButton(
                   icon: const Icon(FontAwesomeIcons.bars),
