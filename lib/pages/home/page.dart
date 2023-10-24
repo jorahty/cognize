@@ -1,5 +1,6 @@
 import 'package:cognize/pages/about/page.dart';
 import 'package:cognize/pages/create/page.dart';
+import 'package:cognize/pages/profile/page.dart';
 import 'package:cognize/pages/topics/page.dart';
 import 'package:cognize/widgets/common/pressable.dart';
 import 'package:flutter/material.dart';
@@ -26,34 +27,22 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: const Text('Cognize'),
-              leading: Row(
-                children: [
-                  Builder(
-                      builder: (BuildContext context) => IconButton(
-                            icon: const Icon(FontAwesomeIcons.bars),
-                            onPressed: () => Scaffold.of(context).openDrawer(),
-                          )),
-                ],
+              leading: Builder(
+                builder: (BuildContext context) => IconButton(
+                  icon: const Icon(FontAwesomeIcons.bars),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                ),
               ),
               actions: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(user.photoURL!),
+                Pressable(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => const ProfilePage(),
                       ),
-                    ),
-                    const SizedBox(width: 10),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(context, '/profile');
-                      },
-                      child: Text(user.displayName!),
-                    ),
-                    const SizedBox(width: 10),
-                  ],
+                    );
+                  },
+                  child: Image.network(user.photoURL!),
                 ),
               ],
             ),
