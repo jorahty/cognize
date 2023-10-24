@@ -28,11 +28,6 @@ class TopicCard extends StatelessWidget {
       child: Hero(
         tag: topic.img,
         child: Card(
-          elevation: 0,
-          clipBehavior: Clip.antiAlias,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
-          ),
           child: ListView(
             physics: const NeverScrollableScrollPhysics(),
             children: [

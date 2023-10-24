@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
-final theme = ThemeData.dark();
+final theme = ThemeData(
+  brightness: Brightness.dark,
+  cardTheme: CardTheme(
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15.0),
+    ),
+    clipBehavior: Clip.antiAlias,
+  ),
+);
 
 // final theme = ThemeData(
 //   splashFactory: NoSplash.splashFactory,

@@ -27,10 +27,6 @@ class QuizCard extends StatelessWidget {
         );
       },
       child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
         child: ListTile(
           mouseCursor: SystemMouseCursors.click,
           leading: QuizBadge(topicId: topic.id, quizId: quiz.id),
