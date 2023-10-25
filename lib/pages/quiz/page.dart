@@ -261,7 +261,6 @@ class CongratsPage extends StatelessWidget {
               color: Theme.of(context).colorScheme.secondary,
             )
                 .animate(onPlay: (controller) => controller.repeat())
-                .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
                 .addEffect(
                   onMobileWeb
                       ? const Effect()
@@ -271,6 +270,7 @@ class CongratsPage extends StatelessWidget {
                           color: Colors.white30,
                         ),
                 )
+                .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
                 .scaleXY(end: 1.1, duration: 600.ms)
                 .then(delay: 600.ms)
                 .scaleXY(end: 1 / 1.1, curve: Curves.easeOut)
