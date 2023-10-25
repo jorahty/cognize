@@ -259,10 +259,14 @@ class CongratsPage extends StatelessWidget {
                   target: onMobileWeb ? 0 : 1,
                   onPlay: (controller) => controller.repeat(),
                 )
-                .shimmer(
-                  delay: 400.ms,
-                  duration: 1800.ms,
-                  color: Colors.white30,
+                .addEffect(
+                  onMobileWeb
+                      ? const Effect()
+                      : ShimmerEffect(
+                          delay: 400.ms,
+                          duration: 1800.ms,
+                          color: Colors.white30,
+                        ),
                 )
                 .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
                 .scaleXY(end: 1.1, duration: 600.ms)
