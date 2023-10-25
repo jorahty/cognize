@@ -114,7 +114,6 @@ class StartPage extends StatelessWidget {
                 label: const Text('Start Quiz!'),
               )
                   .animate(
-                    target: onMobileWeb ? 0 : 1,
                     onPlay: (controller) => controller.repeat(reverse: true),
                   )
                   .slideY(
@@ -122,7 +121,13 @@ class StartPage extends StatelessWidget {
                     duration: 1.seconds,
                     curve: const Cubic(1, 0, 0.7, 1),
                   )
-                  .tint(color: const Color(0x3462DAFF)),
+                  .addEffect(
+                    onMobileWeb
+                        ? const Effect()
+                        : const TintEffect(
+                            color: Color(0x3462DAFF),
+                          ),
+                  ),
             ),
           ),
         ),
@@ -255,10 +260,7 @@ class CongratsPage extends StatelessWidget {
               label: const Text('Mark Complete'),
               color: Theme.of(context).colorScheme.secondary,
             )
-                .animate(
-                  target: onMobileWeb ? 0 : 1,
-                  onPlay: (controller) => controller.repeat(),
-                )
+                .animate(onPlay: (controller) => controller.repeat())
                 .addEffect(
                   onMobileWeb
                       ? const Effect()
