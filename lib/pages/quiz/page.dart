@@ -1,4 +1,5 @@
 import 'package:cognize/pages/quiz/state.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
@@ -80,6 +81,13 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final state = Provider.of<QuizState>(context);
 
+    final platform = Theme.of(context).platform;
+
+    final onMobile =
+        platform == TargetPlatform.iOS || platform == TargetPlatform.android;
+
+    final onMobileWeb = onMobile && kIsWeb;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -106,7 +114,9 @@ class StartPage extends StatelessWidget {
                 label: const Text('Start Quiz!'),
               )
                   .animate(
-                      onPlay: (controller) => controller.repeat(reverse: true))
+                    target: onMobileWeb ? 0 : 1,
+                    onPlay: (controller) => controller.repeat(reverse: true),
+                  )
                   .slideY(
                     end: 0.15,
                     duration: 1.seconds,
@@ -214,6 +224,13 @@ class CongratsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final platform = Theme.of(context).platform;
+
+    final onMobile =
+        platform == TargetPlatform.iOS || platform == TargetPlatform.android;
+
+    final onMobileWeb = onMobile && kIsWeb;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -238,9 +255,15 @@ class CongratsPage extends StatelessWidget {
               label: const Text('Mark Complete'),
               color: Theme.of(context).colorScheme.secondary,
             )
-                .animate(onPlay: (controller) => controller.repeat())
+                .animate(
+                  target: onMobileWeb ? 0 : 1,
+                  onPlay: (controller) => controller.repeat(),
+                )
                 .shimmer(
-                    delay: 400.ms, duration: 1800.ms, color: Colors.white30)
+                  delay: 400.ms,
+                  duration: 1800.ms,
+                  color: Colors.white30,
+                )
                 .shake(hz: 1, curve: Curves.easeInOutCubic, rotation: 0.05)
                 .scaleXY(end: 1.1, duration: 600.ms)
                 .then(delay: 600.ms)
