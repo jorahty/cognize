@@ -8,7 +8,7 @@ class Button extends StatefulWidget {
     this.color = const Color(0xff2A66FF),
     required this.onPressed,
     this.leading,
-    required this.label,
+    this.label,
   }) : super(key: key) {
     final hsl = HSLColor.fromColor(color);
     highlightColor =
@@ -18,7 +18,7 @@ class Button extends StatefulWidget {
   final Color color;
   final VoidCallback onPressed;
   final Widget? leading;
-  final Widget label;
+  final Widget? label;
   late final Color highlightColor;
 
   @override
@@ -47,16 +47,18 @@ class _ButtonState extends State<Button> {
           ),
           padding: const EdgeInsets.all(15),
           child: Builder(builder: (context) {
-            if (widget.leading == null) return widget.label;
+            if (widget.leading != null && widget.label != null) {
+              return Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  widget.leading!,
+                  const SizedBox(width: 10),
+                  widget.label!,
+                ],
+              );
+            }
 
-            return Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                widget.leading!,
-                const SizedBox(width: 10),
-                widget.label,
-              ],
-            );
+            return widget.leading ?? widget.label ?? const SizedBox.shrink();
           }),
         ),
       ),
