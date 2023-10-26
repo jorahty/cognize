@@ -31,6 +31,7 @@ class App extends StatelessWidget {
       initialData: Report(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        title: 'Cognize',
         theme: theme,
         home: const AuthGate(),
       ),
