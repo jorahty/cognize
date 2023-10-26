@@ -56,27 +56,3 @@ class TopicDetails extends StatelessWidget {
     );
   }
 }
-
-/*
-[
-  Hero(
-    tag: topic.img,
-    child: Image.asset(
-      'assets/topics/${topic.img}',
-      width: MediaQuery.of(context).size.width,
-    ),
-  ),
-  Padding(
-    padding: const EdgeInsets.all(20),
-    child: Text(
-      topic.title,
-      style: Theme.of(context).textTheme.headlineSmall,
-    ),
-  ),
-  Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10),
-    child: QuizList(topic: topic),
-  ),
-  SizedBox(height: MediaQuery.of(context).size.height / 2),
-]
-*/
