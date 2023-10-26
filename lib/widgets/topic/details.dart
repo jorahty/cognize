@@ -18,34 +18,65 @@ class TopicDetails extends StatelessWidget {
           tooltip: MaterialLocalizations.of(context).backButtonTooltip,
         ),
       ),
-      body: Center(
-        child: SizedBox(
-          width: 700,
-          child: ListView(
+      body: ListView(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Hero(
-                tag: topic.img,
-                child: Image.asset(
-                  'assets/topics/${topic.img}',
-                  width: MediaQuery.of(context).size.width,
+              Container(
+                constraints: const BoxConstraints(maxWidth: 700),
+                child: Column(
+                  children: [
+                    Hero(
+                      tag: topic.img,
+                      child: Image.asset(
+                        'assets/topics/${topic.img}',
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Text(
+                        topic.title,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: QuizList(topic: topic),
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height / 2),
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                  topic.title,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: QuizList(topic: topic),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height / 2),
             ],
-          ),
-        ),
+          )
+        ],
       ),
     );
   }
 }
+
+/*
+[
+  Hero(
+    tag: topic.img,
+    child: Image.asset(
+      'assets/topics/${topic.img}',
+      width: MediaQuery.of(context).size.width,
+    ),
+  ),
+  Padding(
+    padding: const EdgeInsets.all(20),
+    child: Text(
+      topic.title,
+      style: Theme.of(context).textTheme.headlineSmall,
+    ),
+  ),
+  Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10),
+    child: QuizList(topic: topic),
+  ),
+  SizedBox(height: MediaQuery.of(context).size.height / 2),
+]
+*/
