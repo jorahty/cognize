@@ -31,7 +31,7 @@ class TopicDetails extends StatelessWidget {
                     aspectRatio: 16 / 9,
                     child: Image.asset(
                       'assets/topics/${topic.img}',
-                      fit: BoxFit.fill,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
