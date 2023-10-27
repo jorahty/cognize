@@ -15,7 +15,6 @@ class TopicGrid extends StatelessWidget {
           10, 10, 10, MediaQuery.of(context).size.height * 0.7),
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
-      childAspectRatio: 0.9,
       children: topics
           .map((topic) => TopicCard(topic: topic))
           .toList()

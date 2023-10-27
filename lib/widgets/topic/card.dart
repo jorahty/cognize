@@ -33,10 +33,11 @@ class TopicCard extends StatelessWidget {
             children: [
               Column(
                 children: [
-                  SizedBox(
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
                     child: Image.asset(
                       'assets/topics/${topic.img}',
-                      fit: BoxFit.contain,
+                      fit: BoxFit.fill,
                     ),
                   ),
                   Padding(
