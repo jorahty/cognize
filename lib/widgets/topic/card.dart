@@ -51,7 +51,7 @@ class TopicCard extends StatelessWidget {
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 8),
                         TopicProgress(topic: topic),
                       ],
                     ),
