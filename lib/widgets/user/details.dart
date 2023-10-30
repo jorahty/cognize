@@ -32,6 +32,16 @@ class UserDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const Spacer(),
+             Text(
+              '${report.points}',
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+            const SizedBox(height: 15),
+            Text(
+              'Total Points',
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            const Spacer(),
             Text(
               '${report.total}',
               style: Theme.of(context).textTheme.displayMedium,

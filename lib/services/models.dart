@@ -67,9 +67,10 @@ class Topic {
 class Report {
   String uid;
   int total;
+  int points;
   Map topics;
 
-  Report({this.uid = '', this.topics = const {}, this.total = 0});
+  Report({this.uid = '', this.topics = const {}, this.total = 0, this.points = 0});
   factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);
   Map<String, dynamic> toJson() => _$ReportToJson(this);
 }
