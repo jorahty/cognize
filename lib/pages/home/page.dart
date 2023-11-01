@@ -12,7 +12,7 @@ import 'package:cognize/pages/home/drawer.dart';
 import 'package:cognize/services/auth.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +28,24 @@ class HomePage extends StatelessWidget {
           final topics = snapshot.data!;
           return Scaffold(
             appBar: AppBar(
-              title: SvgPicture.asset('assets/logo.svg', height: 30),
-              leading: Builder(
-                builder: (BuildContext context) => IconButton(
-                  icon: const Icon(FontAwesomeIcons.bars),
-                  onPressed: () => Scaffold.of(context).openDrawer(),
-                ),
+              title: Row(
+                children: [
+                  SvgPicture.asset('assets/logo.svg', height: 30),
+                  const SizedBox(width: 16), // Add spacing between logo and search bar
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search...',
+                        ),
+                        onSubmitted: (String value) {
+                          // Handle the search query here
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
               actions: [
                 Pressable(
