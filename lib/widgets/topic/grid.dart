@@ -5,6 +5,25 @@ import 'package:cognize/widgets/topic/card.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 
+bool filterTopics(String topics, String query) {
+  query = query.toLowerCase();
+  int topicIndex = 0;
+
+  for (int queryIndex = 0; queryIndex < query.length; queryIndex++) {
+    if (topicIndex >= topics.length) {
+      return false;
+    }
+
+    if (topics[topicIndex] != query[queryIndex]) {
+      return false;
+    }
+    
+    topicIndex += 1;
+  }
+
+  return true;
+}
+
 class TopicGrid extends StatelessWidget {
   final List<Topic> topics;
   const TopicGrid({super.key, required this.topics});
@@ -13,8 +32,12 @@ class TopicGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final searchInput = Provider.of<SearchState>(context).input;
 
-    final filteredTopics =
-        searchInput.isEmpty ? topics : []; // use `searchInput`
+    final filteredTopics = searchInput.isEmpty
+        ? topics
+        : topics
+            .where((topic) => filterTopics(
+                topic.title.toLowerCase(), searchInput.toLowerCase()))
+            .toList();
 
     return GridView.extent(
       maxCrossAxisExtent: 350,
