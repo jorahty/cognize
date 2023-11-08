@@ -9,6 +9,8 @@ class TopicGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // filter topics based on search state
+
     return GridView.extent(
       maxCrossAxisExtent: 350,
       padding: EdgeInsets.fromLTRB(
