@@ -1,5 +1,6 @@
 import 'package:cognize/pages/about/page.dart';
 import 'package:cognize/pages/create/page.dart';
+import 'package:cognize/pages/home/search_state.dart';
 import 'package:cognize/pages/profile/page.dart';
 import 'package:cognize/pages/topics/page.dart';
 import 'package:cognize/widgets/common/pressable.dart';
@@ -10,6 +11,7 @@ import 'package:cognize/services/models.dart';
 import 'package:cognize/services/firestore.dart';
 import 'package:cognize/pages/home/drawer.dart';
 import 'package:cognize/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -26,48 +28,67 @@ class HomePage extends StatelessWidget {
               body: Center(child: CircularProgressIndicator()));
         } else {
           final topics = snapshot.data!;
-          return Scaffold(
-            appBar: AppBar(
-              title: Row(
-                children: [
-                  SvgPicture.asset('assets/logo.svg', height: 30),
-                  const SizedBox(width: 16), // Add spacing between logo and search bar
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: TextField(
-                        decoration: const InputDecoration(
-                          hintText: 'Search...',
+
+          return ChangeNotifierProvider(
+            create: (_) => SearchState(),
+            child: Scaffold(
+              appBar: AppBar(
+                title: Row(
+                  children: [
+                    SvgPicture.asset('assets/logo.svg', height: 30),
+                    const SizedBox(
+                        width: 16), // Add spacing between logo and search bar
+                    const SearchBar(),
+                  ],
+                ),
+                actions: [
+                  Pressable(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              const ProfilePage(),
                         ),
-                        onSubmitted: (String value) {
-                          // Handle the search query here
-                        },
-                      ),
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: ClipOval(child: Image.network(user.photoURL!)),
                     ),
                   ),
                 ],
               ),
-              actions: [
-                Pressable(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const ProfilePage(),
-                      ),
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: ClipOval(child: Image.network(user.photoURL!)),
-                  ),
-                ),
-              ],
+              drawer: HomeDrawer(topics: topics),
+              body: _Body(topics: topics),
             ),
-            drawer: HomeDrawer(topics: topics),
-            body: _Body(topics: topics),
           );
         }
       },
+    );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final searchState = Provider.of<SearchState>(context);
+
+    return Expanded(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: TextField(
+          controller: searchState.controller,
+          onChanged: searchState.setInput,
+          decoration: const InputDecoration(
+            hintText: 'Search...',
+          ),
+          onSubmitted: (String value) {
+            // Handle the search query here
+          },
+        ),
+      ),
     );
   }
 }
