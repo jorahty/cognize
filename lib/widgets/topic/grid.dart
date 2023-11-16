@@ -35,8 +35,8 @@ class TopicGrid extends StatelessWidget {
     final filteredTopics = searchInput.isEmpty
         ? topics
         : topics
-            .where((topic) => filterTopics(
-                topic.title.toLowerCase(), searchInput.toLowerCase()))
+            .where((topic) => topic.title.toLowerCase()
+            .contains(searchInput.toLowerCase()))
             .toList();
 
     return GridView.extent(
