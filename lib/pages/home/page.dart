@@ -1,5 +1,5 @@
 import 'package:cognize/pages/about/page.dart';
-import 'package:cognize/pages/create/page.dart';
+import 'package:cognize/pages/create/quiz_setting_page.dart';
 import 'package:cognize/pages/home/search_state.dart';
 import 'package:cognize/pages/profile/page.dart';
 import 'package:cognize/pages/topics/page.dart';
@@ -12,6 +12,7 @@ import 'package:cognize/services/firestore.dart';
 import 'package:cognize/pages/home/drawer.dart';
 import 'package:cognize/services/auth.dart';
 import 'package:provider/provider.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -114,7 +115,7 @@ class _BodyState extends State<_Body> {
     final pages = [
       TopicsPage(topics: widget.topics),
       const AboutPage(),
-      const CreatePage(),
+      QuizSettingsPage(),
     ];
 
     final navBarItems = [
