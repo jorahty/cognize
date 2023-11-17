@@ -9,7 +9,7 @@ class QuizSettingsPage extends StatefulWidget {
 class _QuizSettingsPageState extends State<QuizSettingsPage> {
   String selectedCategory = "General Knowledge";
   int numberOfQuestions = 5;
-  String quizTitle = "";
+  String quizTitle = "random";
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +20,8 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             DropdownButton<String>(
               value: selectedCategory,
@@ -42,6 +44,7 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
                 );
               }).toList(),
             ),
+            SizedBox(height: 16),
             TextFormField(
               decoration: InputDecoration(labelText: 'Quiz Title'),
               onChanged: (value) {
@@ -50,6 +53,7 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
                 });
               },
             ),
+            SizedBox(height: 16),
             TextFormField(
               decoration: InputDecoration(labelText: 'Number of Questions'),
               keyboardType: TextInputType.number,
@@ -59,6 +63,7 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
                 });
               },
             ),
+            SizedBox(height: 32),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
