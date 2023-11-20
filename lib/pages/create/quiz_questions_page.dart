@@ -128,12 +128,14 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
             // You can save the 'questions' array here
             print(questions);
 
-            // Show the confirmation page without delay
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
-                builder: (context) => QuizSubmissionPage(),
-              ),
-            );
+            // Show the confirmation page for a couple of seconds
+            Future.delayed(Duration(seconds: 2), () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => QuizSubmissionPage(),
+                ),
+              );
+            });
           },
           child: Text('Submit'),
         ),
