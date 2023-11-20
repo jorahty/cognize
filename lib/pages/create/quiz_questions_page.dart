@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'quiz_submit_page.dart';
+import 'package:cognize/services/models.dart';
+import 'dart:convert';
 
 class QuizQuestionsPage extends StatefulWidget {
   final String category;
@@ -18,23 +20,61 @@ class QuizQuestionsPage extends StatefulWidget {
 }
 
 class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
-  late List<Map<String, dynamic>> questions;
-  late List<String?> selectedAnswers; // Track selected answers for each question
+  late Quiz userCreatedQuiz;
+  List<List<Option>> optionValues = [];
 
   @override
   void initState() {
     super.initState();
 
-    questions = List.generate(
-      widget.numQuestions,
-      (index) => {
-        'question': '',
-        'options': ['', '', ''],
-        'correctAnswer': '', // Initialize correctAnswer to an empty string
-      },
+    userCreatedQuiz = Quiz(
+      id: FirebaseFirestore.instance.collection('quizzes').doc().id,
+      title: widget.title,
+      topic: widget.category,
+      description: 'Default Description',
+      questions: List.generate(widget.numQuestions, (index) {
+        optionValues.add(List.generate(3, (i) => Option(value: '', detail: '', correct: false)));
+        return Question(
+          text: '',
+          options: List.generate(3, (i) => Option(value: '', detail: '', correct: false)),
+        );
+      }),
     );
+  }
 
-    selectedAnswers = List.generate(widget.numQuestions, (index) => null);
+  void submitQuizToFirestore() async {
+    try {
+      List<Map<String, dynamic>> questionsData = [];
+
+      for (int i = 0; i < userCreatedQuiz.questions.length; i++) {
+        Map<String, dynamic> questionData = {
+          'text': userCreatedQuiz.questions[i].text,
+          'options': optionValues[i].map((option) => option.toJson()).toList(),
+        };
+
+        questionsData.add(questionData);
+      }
+
+      Map<String, dynamic> quizData = {
+        'id': userCreatedQuiz.id,
+        'title': userCreatedQuiz.title,
+        'topic': userCreatedQuiz.topic,
+        'description': userCreatedQuiz.description,
+        'video': userCreatedQuiz.video,
+        'questions': questionsData,
+      };
+
+      print('QuizData before submission: $quizData');
+
+      await FirebaseFirestore.instance
+          .collection('quizzes')
+          .doc(userCreatedQuiz.id)
+          .set(quizData);
+
+      print('Quiz submitted to Firestore!');
+    } catch (error) {
+      print('Error submitting quiz to Firestore: $error');
+    }
   }
 
   @override
@@ -71,48 +111,54 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          questions[index]['question'] = value;
+                          userCreatedQuiz.questions[index].text = value;
                         });
                       },
                     ),
                     SizedBox(height: 16),
+
                     for (int i = 0; i < 3; i++) ...[
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            labelText: 'Option ${i + 1}',
-                          ),
-                          onChanged: (value) {
-                            setState(() {
-                              questions[index]['options'][i] = value;
-                            });
-                          },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Option ${i + 1} Value',
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  optionValues[index][i].value = value;
+                                });
+                              },
+                            ),
+                            SizedBox(height: 8),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Option ${i + 1} Detail (Optional)',
+                              ),
+                              onChanged: (value) {
+                                setState(() {
+                                  optionValues[index][i].detail = value;
+                                });
+                              },
+                            ),
+                            SizedBox(height: 8),
+                            Checkbox(
+                              value: optionValues[index][i].correct,
+                              onChanged: (bool? newValue) {
+                                setState(() {
+                                  optionValues[index][i].correct = newValue ?? false;
+                                });
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     ],
+
                     SizedBox(height: 16),
-                    DropdownButton<String>(
-                      value: selectedAnswers[index],
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedAnswers[index] = newValue;
-                          questions[index]['correctAnswer'] = newValue!;
-                        });
-                      },
-                      items: (questions[index]['options'] as List<String>? ?? [])
-                          .where((value) => value != null)
-                          .toSet()
-                          .toList()
-                          .map<DropdownMenuItem<String>>(
-                        (value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        },
-                      ).toList(),
-                    ),
                   ],
                 ),
               ),
@@ -124,20 +170,15 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
           onPressed: () {
-            // Handle the submission of questions
-            // You can save the 'questions' array here
-            print(questions);
-
-            // Show the confirmation page for a couple of seconds
-            Future.delayed(Duration(seconds: 2), () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => QuizSubmissionPage(),
-                ),
-              );
-            });
+            submitQuizToFirestore();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => QuizSubmissionPage(userCreatedQuiz: userCreatedQuiz),
+              ),
+            );
           },
-          child: Text('Submit'),
+          child: Text('Next'),
         ),
       ),
     );

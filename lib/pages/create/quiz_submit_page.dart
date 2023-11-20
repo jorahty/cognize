@@ -1,22 +1,10 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:cognize/services/models.dart';
 
 class QuizSubmissionPage extends StatelessWidget {
   final Quiz userCreatedQuiz;
 
-  QuizSubmissionPage({required this.userCreatedQuiz}) {
-    _sendQuizToDatabase(userCreatedQuiz); // Call the function to send the quiz to the database
-  }
-
-  Future<void> _sendQuizToDatabase(Quiz quiz) async {
-    try {
-      await FirestoreService().addQuiz(quiz);
-      print('Quiz submitted successfully!');
-    } catch (e) {
-      print('Error submitting quiz: $e');
-      // Handle the error appropriately.
-    }
-  }
+  QuizSubmissionPage({required this.userCreatedQuiz});
 
   @override
   Widget build(BuildContext context) {
