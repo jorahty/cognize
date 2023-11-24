@@ -29,7 +29,6 @@ class Question {
   }
 }
 
-
 @JsonSerializable()
 class Quiz {
   String id;
@@ -41,13 +40,13 @@ class Quiz {
 
   Quiz(
       {this.title = '',
-      this.video = '',
-      this.description = '',
+      this.video = 'link to topic about video',
+      this.description = 'enter a description for quiz',
       this.id = '',
       this.topic = '',
       this.questions = const []});
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
-  
+
   Map<String, dynamic> toJson() {
     return {
       'id': id,
@@ -86,7 +85,8 @@ class Report {
   int points;
   Map topics;
 
-  Report({this.uid = '', this.topics = const {}, this.total = 0, this.points = 0});
+  Report(
+      {this.uid = '', this.topics = const {}, this.total = 0, this.points = 0});
   factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);
   Map<String, dynamic> toJson() => _$ReportToJson(this);
 }

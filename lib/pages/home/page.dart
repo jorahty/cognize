@@ -13,7 +13,6 @@ import 'package:cognize/pages/home/drawer.dart';
 import 'package:cognize/services/auth.dart';
 import 'package:provider/provider.dart';
 
-
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 

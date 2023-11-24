@@ -17,7 +17,7 @@ bool filterTopics(String topics, String query) {
     if (topics[topicIndex] != query[queryIndex]) {
       return false;
     }
-    
+
     topicIndex += 1;
   }
 
@@ -35,8 +35,8 @@ class TopicGrid extends StatelessWidget {
     final filteredTopics = searchInput.isEmpty
         ? topics
         : topics
-            .where((topic) => topic.title.toLowerCase()
-            .contains(searchInput.toLowerCase()))
+            .where((topic) =>
+                topic.title.toLowerCase().contains(searchInput.toLowerCase()))
             .toList();
 
     return GridView.extent(

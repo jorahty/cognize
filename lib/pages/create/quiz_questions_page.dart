@@ -7,11 +7,13 @@ class QuizQuestionsPage extends StatefulWidget {
   final String category;
   final String title;
   final int numQuestions;
+  final String description;
 
   QuizQuestionsPage({
     required this.category,
     required this.title,
     required this.numQuestions,
+    required this.description,
   });
 
   @override
@@ -33,12 +35,13 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
       id: convertToSlug(widget.title),
       title: widget.title,
       topic: widget.category,
-      description: 'Default Description',
+      description: widget.description,
       video: 'Default Video URL',
       questions: List.generate(widget.numQuestions, (index) {
         return Question(
           text: '',
-          options: List.generate(3, (i) => Option(value: '', detail: '', correct: false)),
+          options: List.generate(
+              3, (i) => Option(value: '', detail: '', correct: false)),
         );
       }),
     );
@@ -50,14 +53,15 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
       await FirestoreService().submitQuiz(userCreatedQuiz);
 
       // Fetch the topic by category
-      Topic? topic = await FirestoreService().getTopicByCategory(widget.category);
-      
+      Topic? topic =
+          await FirestoreService().getTopicByCategory(widget.category);
+
       if (topic != null) {
         // Add the new quiz to the topic
         topic.quizzes.add(userCreatedQuiz);
 
         // Update the topic in Firestore
-        await FirestoreService().updateTopicWithQuiz(topic,userCreatedQuiz );
+        await FirestoreService().updateTopicWithQuiz(topic, userCreatedQuiz);
 
         print('Quiz submitted to Firestore and added to the topic!');
       } else {
@@ -67,7 +71,6 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
       print('Error submitting quiz to Firestore: $error');
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +118,8 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
                         ),
                         onChanged: (value) {
                           setState(() {
-                            userCreatedQuiz.questions[index].options[i].value = value;
+                            userCreatedQuiz.questions[index].options[i].value =
+                                value;
                           });
                         },
                       ),
@@ -125,16 +129,19 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
                         ),
                         onChanged: (value) {
                           setState(() {
-                            userCreatedQuiz.questions[index].options[i].detail = value;
+                            userCreatedQuiz.questions[index].options[i].detail =
+                                value;
                           });
                         },
                       ),
                       SizedBox(height: 8),
                       Checkbox(
-                        value: userCreatedQuiz.questions[index].options[i].correct,
+                        value:
+                            userCreatedQuiz.questions[index].options[i].correct,
                         onChanged: (value) {
                           setState(() {
-                            userCreatedQuiz.questions[index].options[i].correct = value ?? false;
+                            userCreatedQuiz.questions[index].options[i]
+                                .correct = value ?? false;
                           });
                         },
                       ),
@@ -155,7 +162,8 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => QuizSubmissionPage(userCreatedQuiz: userCreatedQuiz),
+                builder: (context) =>
+                    QuizSubmissionPage(userCreatedQuiz: userCreatedQuiz),
               ),
             );
           },

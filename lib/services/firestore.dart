@@ -21,6 +21,7 @@ class FirestoreService {
     var snapshot = await ref.get();
     return Quiz.fromJson(snapshot.data()!);
   }
+
   updateUserReport(Quiz quiz) {
     final user = AuthService().user!;
     final ref = _db.collection('reports').doc(user.uid);
@@ -52,10 +53,11 @@ class FirestoreService {
       print('Error submitting quiz to Firestore: $error');
     }
   }
-  
+
   Future<Topic?> getTopicByCategory(String category) async {
     try {
-      var snapshot = await _db.collection('topics').where('id', isEqualTo: category).get();
+      var snapshot =
+          await _db.collection('topics').where('id', isEqualTo: category).get();
       if (snapshot.docs.isNotEmpty) {
         var data = snapshot.docs.first.data();
         return Topic.fromJson(data);
@@ -80,8 +82,6 @@ class FirestoreService {
       print('Error updating topic with new quiz in Firestore: $error');
     }
   }
-
-
 
   Stream<Report> userReportStream() {
     return AuthService().authStream.switchMap((user) {

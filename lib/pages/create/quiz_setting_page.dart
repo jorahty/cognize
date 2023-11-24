@@ -13,6 +13,7 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
   Topic? selectedCategory; // Change the type to Topic
   int numberOfQuestions = 5;
   String quizTitle = "random";
+  String quizDescription = "describe quiz";
 
   @override
   void initState() {
@@ -66,18 +67,17 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
                           });
                         }
                       },
-                      items: snapshot.data!
-                          .map<DropdownMenuItem<Topic>>(
-                            (Topic topic) {
-                              return DropdownMenuItem<Topic>(
-                                value: topic,
-                                child: Text(topic.id ?? 'No ID'),
-                              );
-                            },
-                          )
-                          .toList(),
+                      items: snapshot.data!.map<DropdownMenuItem<Topic>>(
+                        (Topic topic) {
+                          return DropdownMenuItem<Topic>(
+                            value: topic,
+                            child: Text(topic.id ?? 'No ID'),
+                          );
+                        },
+                      ).toList(),
                     ),
                   ),
+                  SizedBox(height: 40),
                   TextFormField(
                     decoration: InputDecoration(labelText: 'Quiz Title'),
                     onChanged: (value) {
@@ -86,9 +86,10 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
                       });
                     },
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 40),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Number of Questions'),
+                    decoration:
+                        InputDecoration(labelText: 'Number of Questions'),
                     keyboardType: TextInputType.number,
                     onChanged: (value) {
                       setState(() {
@@ -96,7 +97,16 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
                       });
                     },
                   ),
-                  SizedBox(height: 32),
+                  SizedBox(height: 40),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Quiz Description'),
+                    onChanged: (value) {
+                      setState(() {
+                        quizDescription = value;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: () {
                       if (selectedCategory != null) {
@@ -107,6 +117,7 @@ class _QuizSettingsPageState extends State<QuizSettingsPage> {
                               category: selectedCategory!.id ?? '',
                               title: quizTitle,
                               numQuestions: numberOfQuestions,
+                              description: quizDescription,
                             ),
                           ),
                         );

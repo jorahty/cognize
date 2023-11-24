@@ -32,7 +32,7 @@ class UserDetails extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const Spacer(),
-             Text(
+            Text(
               '${report.points}',
               style: Theme.of(context).textTheme.displayMedium,
             ),
