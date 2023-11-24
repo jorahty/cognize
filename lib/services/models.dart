@@ -21,8 +21,14 @@ class Question {
   Question({this.options = const [], this.text = ''});
   factory Question.fromJson(Map<String, dynamic> json) =>
       _$QuestionFromJson(json);
-  Map<String, dynamic> toJson() => _$QuestionToJson(this);
+  Map<String, dynamic> toJson() {
+    return {
+      'text': text,
+      'options': options.map((option) => option.toJson()).toList(),
+    };
+  }
 }
+
 
 @JsonSerializable()
 class Quiz {
@@ -41,7 +47,17 @@ class Quiz {
       this.topic = '',
       this.questions = const []});
   factory Quiz.fromJson(Map<String, dynamic> json) => _$QuizFromJson(json);
-  Map<String, dynamic> toJson() => _$QuizToJson(this);
+  
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'video': video,
+      'topic': topic,
+      'questions': questions.map((question) => question.toJson()).toList(),
+    };
+  }
 }
 
 @JsonSerializable()

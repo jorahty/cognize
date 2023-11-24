@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'quiz_submit_page.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/services/firestore.dart';
-
-import 'dart:convert';
+import 'quiz_submit_page.dart';
 
 class QuizQuestionsPage extends StatefulWidget {
   final String category;
@@ -21,23 +18,24 @@ class QuizQuestionsPage extends StatefulWidget {
   _QuizQuestionsPageState createState() => _QuizQuestionsPageState();
 }
 
+String convertToSlug(String input) {
+  return input.toLowerCase().replaceAll(' ', '-');
+}
+
 class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
   late Quiz userCreatedQuiz;
-  List<List<Option>> optionValues = [];
-  late String selectedTopicId; // New variable to store selected topic ID
 
   @override
   void initState() {
     super.initState();
-    selectedTopicId = ''; // Initialize the selectedTopicId
 
     userCreatedQuiz = Quiz(
-      id: FirebaseFirestore.instance.collection('quizzes').doc().id,
+      id: convertToSlug(widget.title),
       title: widget.title,
-      topic: selectedTopicId, // Set topic to selectedTopicId
+      topic: widget.category,
       description: 'Default Description',
+      video: 'Default Video URL',
       questions: List.generate(widget.numQuestions, (index) {
-        optionValues.add(List.generate(3, (i) => Option(value: '', detail: '', correct: false)));
         return Question(
           text: '',
           options: List.generate(3, (i) => Option(value: '', detail: '', correct: false)),
@@ -46,22 +44,30 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
     );
   }
 
-  void submitTopicToFirestore(Topic topic) async {
+  Future<void> submitQuizToFirestore() async {
     try {
-      // Convert Topic to Map
-      Map<String, dynamic> topicData = topic.toMap();
+      // Submit quiz to Firestore
+      await FirestoreService().submitQuiz(userCreatedQuiz);
 
-      // Submit Topic to Firestore
-      await FirebaseFirestore.instance
-          .collection('topics')
-          .doc(topic.id)
-          .set(topicData);
+      // Fetch the topic by category
+      Topic? topic = await FirestoreService().getTopicByCategory(widget.category);
 
-      print('Topic submitted to Firestore!');
+      if (topic != null) {
+        // Add the new quiz to the topic
+        topic.quizzes.add(userCreatedQuiz);
+
+        // Update the topic in Firestore
+        await FirestoreService().updateTopicWithQuiz(topic,userCreatedQuiz );
+
+        print('Quiz submitted to Firestore and added to the topic!');
+      } else {
+        print('Topic not found!');
+      }
     } catch (error) {
-      print('Error submitting topic to Firestore: $error');
+      print('Error submitting quiz to Firestore: $error');
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -101,49 +107,38 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
                         });
                       },
                     ),
-                    SizedBox(height: 16),
-                    
+                    SizedBox(height: 8),
                     for (int i = 0; i < 3; i++) ...[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Option ${i + 1} Value',
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  optionValues[index][i].value = value;
-                                });
-                              },
-                            ),
-                            SizedBox(height: 8),
-                            TextFormField(
-                              decoration: InputDecoration(
-                                labelText: 'Option ${i + 1} Detail (Optional)',
-                              ),
-                              onChanged: (value) {
-                                setState(() {
-                                  optionValues[index][i].detail = value;
-                                });
-                              },
-                            ),
-                            SizedBox(height: 8),
-                            Checkbox(
-                              value: optionValues[index][i].correct,
-                              onChanged: (bool? newValue) {
-                                setState(() {
-                                  optionValues[index][i].correct = newValue ?? false;
-                                });
-                              },
-                            ),
-                          ],
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Option ${i + 1} Text',
                         ),
+                        onChanged: (value) {
+                          setState(() {
+                            userCreatedQuiz.questions[index].options[i].value = value;
+                          });
+                        },
+                      ),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Option ${i + 1} Description',
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            userCreatedQuiz.questions[index].options[i].detail = value;
+                          });
+                        },
+                      ),
+                      SizedBox(height: 8),
+                      Checkbox(
+                        value: userCreatedQuiz.questions[index].options[i].correct,
+                        onChanged: (value) {
+                          setState(() {
+                            userCreatedQuiz.questions[index].options[i].correct = value ?? false;
+                          });
+                        },
                       ),
                     ],
-
                     SizedBox(height: 16),
                   ],
                 ),
@@ -155,30 +150,8 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
-          onPressed: () async {
-            // Fetch existing topics
-            List<Topic> existingTopics = await FirestoreService().getTopics();
-
-            // Find the selected topic
-            Topic? existingTopic = existingTopics.firstWhere(
-              (topic) => topic.id == selectedTopicId,
-              orElse: () => null,
-            );
-
-            if (existingTopic == null) {
-              print('Selected topic not found in existing topics.');
-              return;
-            }
-
-            // Update quizzes in the selected topic
-            List<Quiz> quizList = existingTopic.quizzes;
-            quizList.add(userCreatedQuiz);
-            existingTopic.quizzes = quizList;
-
-            // Submit the updated topic to Firestore
-            submitTopicToFirestore(existingTopic);
-
-            // Navigate to the next page
+          onPressed: () {
+            submitQuizToFirestore();
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -186,7 +159,7 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
               ),
             );
           },
-          child: Text('Next'),
+          child: Text('Submit Quiz'),
         ),
       ),
     );
