@@ -70,8 +70,6 @@ class FirestoreService {
   Future<void> updateTopicWithQuiz(Topic topic, Quiz quiz) async {
     try {
       // Append the new quiz to the existing list of quizzes
-      topic.quizzes.add(quiz);
-
       // Update the topic in Firestore
       await _db.collection('topics').doc(topic.id).update({
         'quizzes': topic.quizzes.map((quiz) => quiz.toJson()).toList(),

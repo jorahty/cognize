@@ -51,7 +51,7 @@ class _QuizQuestionsPageState extends State<QuizQuestionsPage> {
 
       // Fetch the topic by category
       Topic? topic = await FirestoreService().getTopicByCategory(widget.category);
-
+      
       if (topic != null) {
         // Add the new quiz to the topic
         topic.quizzes.add(userCreatedQuiz);
