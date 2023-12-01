@@ -4,6 +4,7 @@ import 'package:cognize/pages/home/search_state.dart';
 import 'package:cognize/pages/profile/page.dart';
 import 'package:cognize/pages/topics/page.dart';
 import 'package:cognize/widgets/common/pressable.dart';
+import 'package:cognize/widgets/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -60,6 +61,17 @@ class HomePage extends StatelessWidget {
               ),
               drawer: HomeDrawer(topics: topics),
               body: _Body(topics: topics),
+              floatingActionButton: FloatingActionButton(
+                backgroundColor: const Color(0xff2A66FF),
+                child: const Icon(Icons.chat), // Icon for the FAB
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => const CognizeHelper(),
+                    ),
+                  );
+                },
+              ),
             ),
           );
         }
