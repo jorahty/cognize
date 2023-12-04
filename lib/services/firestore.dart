@@ -28,6 +28,7 @@ class FirestoreService {
 
     final fields = {
       'total': FieldValue.increment(1),
+      'points': FieldValue.increment(5),
       'topics': {
         quiz.topic: FieldValue.arrayUnion([quiz.id]),
       },

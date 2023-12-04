@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:cognize/services/auth.dart';
@@ -22,9 +23,24 @@ class UserDetails extends StatelessWidget {
         alignment: Alignment.center,
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.network(user.photoURL!),
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Image.network(user.photoURL!),
+                ),
+                Positioned(
+                  bottom: -5,
+                  right: -5,
+                  child: Builder(
+                    builder: (context) {
+                      // if statement
+                      return RichText(text: const TextSpan(text: "1️⃣", style: TextStyle(fontFamily: "EmojiOne")),);
+                    }
+                  )
+                ),
+              ],
             ),
             const SizedBox(height: 20),
             Text(
