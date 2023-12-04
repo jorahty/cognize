@@ -18,6 +18,8 @@ class UserDetails extends StatelessWidget {
     if (user == null) {
       return const SizedBox.shrink();
     } else {
+      final EmojiParser emojiParser = EmojiParser();
+
       return Container(
         padding: const EdgeInsets.all(30),
         alignment: Alignment.center,
@@ -33,12 +35,21 @@ class UserDetails extends StatelessWidget {
                 Positioned(
                   bottom: -5,
                   right: -5,
-                  child: Builder(
-                    builder: (context) {
-                      // if statement
-                      return RichText(text: const TextSpan(text: "1️⃣", style: TextStyle(fontFamily: "EmojiOne")),);
+                  child: Builder(builder: (context) {
+                    String emoji = '';
+                    if (report.points > 75) {
+                      emoji = '🥇';
+                    } else if (report.points > 50) {
+                      emoji = '🥈';
+                    } else if (report.points > 25) {
+                      emoji = '🥉';
                     }
-                  )
+
+                    return Text(
+                      emoji,
+                      style: TextStyle(fontSize: 25, fontFamily: 'System'),
+                    );
+                  }),
                 ),
               ],
             ),
@@ -99,3 +110,5 @@ class UserDetails extends StatelessWidget {
     }
   }
 }
+
+
