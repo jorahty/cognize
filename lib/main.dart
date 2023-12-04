@@ -5,6 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:cognize/util/firebase_options.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart'; //Added
+
 import 'package:cognize/services/firestore.dart';
 import 'package:cognize/services/models.dart';
 import 'package:cognize/theme.dart';
@@ -16,6 +18,8 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  await dotenv.load(); //Added
+
   runApp(const App());
 }
 
@@ -25,8 +29,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-    PaintingBinding.instance.imageCache.maximumSize = 150;
-    PaintingBinding.instance.imageCache.maximumSizeBytes = 150 << 20;
 
     return StreamProvider(
       create: (_) => FirestoreService().userReportStream(),
@@ -40,3 +42,4 @@ class App extends StatelessWidget {
     );
   }
 }
+

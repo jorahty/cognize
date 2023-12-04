@@ -6,7 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 class CognizeHelper extends StatefulWidget {
-  const CognizeHelper({super.key});
+  const CognizeHelper({Key? key}) : super(key: key);
 
   @override
   State<CognizeHelper> createState() => _CognizeHelperState();
@@ -14,8 +14,8 @@ class CognizeHelper extends StatefulWidget {
 
 class _CognizeHelperState extends State<CognizeHelper> {
   late final TextEditingController promptController;
-  String responseTxt = ''; // THIS IS THE RESPONSE
-  late ResponseModel _responseModel;
+  String responseTxt = '';
+  bool isRequesting = false;
 
   @override
   void initState() {
@@ -45,44 +45,64 @@ class _CognizeHelperState extends State<CognizeHelper> {
         children: [
           PromptBldr(responseTxt: responseTxt),
           TextFormFieldBldr(
-              promptController: promptController, btnFun: completionFun),
+            promptController: promptController,
+            btnFun: () => isRequesting ? null : completionFun(),
+          ),
         ],
       ),
     );
   }
 
-  // Handles http API call for ChatGPT
+  //Handles http API call for ChatGPT
   completionFun() async {
-    setState(() => responseTxt = 'Not Implemented');
+    setState(() {
+      isRequesting = true;
+      responseTxt = 'Loading...';
+    });
 
-    // Send POST request to openai.com ...
-    // final response = await http.post(
-    //   Uri.parse('https://api.openai.com/v1/completions'),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization':
-    //         'Bearer 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'
-    //   },
-    //   body: jsonEncode(
-    //     {
-    //       "model": "text-davinci-003",
-    //       "prompt": promptController.text,
-    //       "max_tokens": 250,
-    //       "temperature": 0,
-    //       "top_p": 1,
-    //     },
-    //   ),
-    // );
+    await Future.delayed(Duration(seconds: 5)); // Introduce a delay of 2 seconds
 
-    // setState(() {
-    //   _responseModel = ResponseModel.fromJson(response.body);
-    //   responseTxt = _responseModel.choices[0]['text'];
-    //   debugPrint(responseTxt);
-    // });
+    final response = await http.post(
+      Uri.parse('https://api.openai.com/v1/engines/davinci/completions'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${dotenv.env['token']}'
+      },
+      body: jsonEncode(
+        {
+          "prompt": promptController.text,
+          "max_tokens": 250,
+          "temperature": 0,
+          "top_p": 1,
+        },
+      ),
+    );
+
+      if (response.statusCode == 200) {
+    final jsonResponse = jsonDecode(response.body);
+
+    if (jsonResponse != null && jsonResponse.containsKey("choices")) {
+      setState(() {
+        responseTxt = jsonResponse["choices"][0]["text"];
+        debugPrint(responseTxt);
+        isRequesting = false;
+      });
+    } else {
+      setState(() {
+        responseTxt = 'Error: Unexpected response format';
+        isRequesting = false;
+      });
+    }
+  } else {
+    setState(() {
+      responseTxt = 'Error: ${response.statusCode}';
+      isRequesting = false;
+    });
+  }
   }
 }
 
-class PromptBldr extends StatelessWidget {
+class PromptBldr extends StatelessWidget{
   const PromptBldr({
     super.key,
     required this.responseTxt,
@@ -91,7 +111,7 @@ class PromptBldr extends StatelessWidget {
   final String responseTxt;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Container(
       height: MediaQuery.of(context).size.height / 1.35,
       color: const Color(0xff434654),
@@ -112,15 +132,15 @@ class PromptBldr extends StatelessWidget {
   }
 }
 
-class TextFormFieldBldr extends StatelessWidget {
+class TextFormFieldBldr extends StatelessWidget{
   const TextFormFieldBldr(
-      {super.key, required this.promptController, required this.btnFun});
-
+    {super.key, required this.promptController, required this.btnFun});
+  
   final TextEditingController promptController;
   final Function btnFun;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
@@ -138,7 +158,7 @@ class TextFormFieldBldr extends StatelessWidget {
                     borderSide: const BorderSide(
                       color: Color(0xff444653),
                     ),
-                    borderRadius: BorderRadius.circular(5.5),
+                      borderRadius: BorderRadius.circular(5.5),
                   ),
                   enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
@@ -153,17 +173,18 @@ class TextFormFieldBldr extends StatelessWidget {
               ),
             ),
             Container(
-                color: const Color(0xff19bc99),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: IconButton(
-                    onPressed: () => btnFun(),
-                    icon: const Icon(
-                      Icons.send,
-                      color: Colors.white,
-                    ),
+              color: const Color(0xff19bc99),
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: IconButton(
+                  onPressed: () => btnFun(),
+                  icon: const Icon(
+                    Icons.send,
+                    color: Colors.white,
                   ),
-                ))
+                ),
+              )
+            )
           ],
         ),
       ),
@@ -171,7 +192,6 @@ class TextFormFieldBldr extends StatelessWidget {
   }
 }
 
-// Defining the ResponseModel class
 class ResponseModel {
   final String id;
   final String object;
@@ -213,9 +233,7 @@ class ResponseModel {
       map['id'] as String,
       map['object'] as String,
       map['model'] as String,
-      List.from(
-        (map['choices'] as List),
-      ),
+      List.from(map['choices'] as List),
     );
   }
 
@@ -236,7 +254,7 @@ class ResponseModel {
     return other.id == id &&
         other.object == object &&
         other.model == model &&
-        listEquals(other.choices, choices);
+        listEquals(other.choices, choices); // Use listEquals from flutter/foundation
   }
 
   @override
